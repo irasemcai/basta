@@ -1,0 +1,605 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="bastaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="conversation">
+          <Key>
+            <PropertyRef Name="idConversation" />
+          </Key>
+          <Property Name="idConversation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dateConversation" Type="datetime" Nullable="false" />
+          <Property Name="idTypeChat" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="gamePlayed">
+          <Key>
+            <PropertyRef Name="idGame" />
+          </Key>
+          <Property Name="idGame" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dateGame" Type="datetime" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'basta.dbo.gameRound' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="gameRound">
+          <Key>
+            <PropertyRef Name="idGamePlayed" />
+            <PropertyRef Name="idRoundPlayed" />
+          </Key>
+          <Property Name="idGamePlayed" Type="int" Nullable="false" />
+          <Property Name="idRoundPlayed" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="gameUser">
+          <Key>
+            <PropertyRef Name="idGameUser" />
+          </Key>
+          <Property Name="idGameUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idGamer" Type="int" Nullable="false" />
+          <Property Name="idGamePlayed" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="message">
+          <Key>
+            <PropertyRef Name="idMessage" />
+          </Key>
+          <Property Name="idMessage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idUserMssg" Type="int" Nullable="false" />
+          <Property Name="idConversationMssg" Type="int" Nullable="false" />
+          <Property Name="message" Type="varchar(max)" Nullable="false" />
+          <Property Name="dateMssg" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="round">
+          <Key>
+            <PropertyRef Name="idRound" />
+          </Key>
+          <Property Name="idRound" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="numRound" Type="int" Nullable="false" />
+          <Property Name="punctuation" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="typeChat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="iduser" />
+          </Key>
+          <Property Name="iduser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="userConversation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idChat" Type="int" Nullable="false" />
+          <Property Name="idUsername" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_conversation_typeChat">
+          <End Role="typeChat" Type="Self.typeChat" Multiplicity="1" />
+          <End Role="conversation" Type="Self.conversation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="typeChat">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="conversation">
+              <PropertyRef Name="idTypeChat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_gameRound_gamePlayed">
+          <End Role="gamePlayed" Type="Self.gamePlayed" Multiplicity="1" />
+          <End Role="gameRound" Type="Self.gameRound" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gamePlayed">
+              <PropertyRef Name="idGame" />
+            </Principal>
+            <Dependent Role="gameRound">
+              <PropertyRef Name="idGamePlayed" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_gameRound_round">
+          <End Role="round" Type="Self.round" Multiplicity="1" />
+          <End Role="gameRound" Type="Self.gameRound" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="round">
+              <PropertyRef Name="idRound" />
+            </Principal>
+            <Dependent Role="gameRound">
+              <PropertyRef Name="idRoundPlayed" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_gameUser_gamePlayed">
+          <End Role="gamePlayed" Type="Self.gamePlayed" Multiplicity="1" />
+          <End Role="gameUser" Type="Self.gameUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gamePlayed">
+              <PropertyRef Name="idGame" />
+            </Principal>
+            <Dependent Role="gameUser">
+              <PropertyRef Name="idGamePlayed" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_gameUser_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="gameUser" Type="Self.gameUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="iduser" />
+            </Principal>
+            <Dependent Role="gameUser">
+              <PropertyRef Name="idGamer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_message_conversation">
+          <End Role="conversation" Type="Self.conversation" Multiplicity="1" />
+          <End Role="message" Type="Self.message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="conversation">
+              <PropertyRef Name="idConversation" />
+            </Principal>
+            <Dependent Role="message">
+              <PropertyRef Name="idConversationMssg" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_message_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="message" Type="Self.message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="iduser" />
+            </Principal>
+            <Dependent Role="message">
+              <PropertyRef Name="idUserMssg" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userConversation_conversation">
+          <End Role="conversation" Type="Self.conversation" Multiplicity="1" />
+          <End Role="userConversation" Type="Self.userConversation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="conversation">
+              <PropertyRef Name="idConversation" />
+            </Principal>
+            <Dependent Role="userConversation">
+              <PropertyRef Name="idChat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userConversation_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="userConversation" Type="Self.userConversation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="iduser" />
+            </Principal>
+            <Dependent Role="userConversation">
+              <PropertyRef Name="idUsername" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bastaModelStoreContainer">
+          <EntitySet Name="conversation" EntityType="Self.conversation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="gamePlayed" EntityType="Self.gamePlayed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="gameUser" EntityType="Self.gameUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="message" EntityType="Self.message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="round" EntityType="Self.round" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="typeChat" EntityType="Self.typeChat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userConversation" EntityType="Self.userConversation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="gameRound" EntityType="Self.gameRound" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [gameRound].[idGamePlayed] AS [idGamePlayed], 
+    [gameRound].[idRoundPlayed] AS [idRoundPlayed]
+    FROM [dbo].[gameRound] AS [gameRound]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_conversation_typeChat" Association="Self.FK_conversation_typeChat">
+            <End Role="typeChat" EntitySet="typeChat" />
+            <End Role="conversation" EntitySet="conversation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_gameRound_gamePlayed" Association="Self.FK_gameRound_gamePlayed">
+            <End Role="gamePlayed" EntitySet="gamePlayed" />
+            <End Role="gameRound" EntitySet="gameRound" />
+          </AssociationSet>
+          <AssociationSet Name="FK_gameRound_round" Association="Self.FK_gameRound_round">
+            <End Role="round" EntitySet="round" />
+            <End Role="gameRound" EntitySet="gameRound" />
+          </AssociationSet>
+          <AssociationSet Name="FK_gameUser_gamePlayed" Association="Self.FK_gameUser_gamePlayed">
+            <End Role="gamePlayed" EntitySet="gamePlayed" />
+            <End Role="gameUser" EntitySet="gameUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_gameUser_user" Association="Self.FK_gameUser_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="gameUser" EntitySet="gameUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_message_conversation" Association="Self.FK_message_conversation">
+            <End Role="conversation" EntitySet="conversation" />
+            <End Role="message" EntitySet="message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_message_user" Association="Self.FK_message_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="message" EntitySet="message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userConversation_conversation" Association="Self.FK_userConversation_conversation">
+            <End Role="conversation" EntitySet="conversation" />
+            <End Role="userConversation" EntitySet="userConversation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userConversation_user" Association="Self.FK_userConversation_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="userConversation" EntitySet="userConversation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bastaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="conversation">
+          <Key>
+            <PropertyRef Name="idConversation" />
+          </Key>
+          <Property Name="idConversation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dateConversation" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idTypeChat" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="typeChat" Relationship="Self.FK_conversation_typeChat" FromRole="conversation" ToRole="typeChat" />
+          <NavigationProperty Name="messages" Relationship="Self.FK_message_conversation" FromRole="conversation" ToRole="message" />
+          <NavigationProperty Name="userConversations" Relationship="Self.FK_userConversation_conversation" FromRole="conversation" ToRole="userConversation" />
+        </EntityType>
+        <EntityType Name="gamePlayed">
+          <Key>
+            <PropertyRef Name="idGame" />
+          </Key>
+          <Property Name="idGame" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dateGame" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="gameUsers" Relationship="Self.FK_gameUser_gamePlayed" FromRole="gamePlayed" ToRole="gameUser" />
+          <NavigationProperty Name="rounds" Relationship="Self.gameRound" FromRole="gamePlayed" ToRole="round" />
+        </EntityType>
+        <EntityType Name="gameUser">
+          <Key>
+            <PropertyRef Name="idGameUser" />
+          </Key>
+          <Property Name="idGameUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idGamer" Type="Int32" Nullable="false" />
+          <Property Name="idGamePlayed" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="gamePlayed" Relationship="Self.FK_gameUser_gamePlayed" FromRole="gameUser" ToRole="gamePlayed" />
+          <NavigationProperty Name="user" Relationship="Self.FK_gameUser_user" FromRole="gameUser" ToRole="user" />
+        </EntityType>
+        <EntityType Name="message">
+          <Key>
+            <PropertyRef Name="idMessage" />
+          </Key>
+          <Property Name="idMessage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idUserMssg" Type="Int32" Nullable="false" />
+          <Property Name="idConversationMssg" Type="Int32" Nullable="false" />
+          <Property Name="message1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dateMssg" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="conversation" Relationship="Self.FK_message_conversation" FromRole="message" ToRole="conversation" />
+          <NavigationProperty Name="user" Relationship="Self.FK_message_user" FromRole="message" ToRole="user" />
+        </EntityType>
+        <EntityType Name="round">
+          <Key>
+            <PropertyRef Name="idRound" />
+          </Key>
+          <Property Name="idRound" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="numRound" Type="Int32" Nullable="false" />
+          <Property Name="punctuation" Type="Double" Nullable="false" />
+          <NavigationProperty Name="gamePlayeds" Relationship="Self.gameRound" FromRole="round" ToRole="gamePlayed" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="typeChat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="conversations" Relationship="Self.FK_conversation_typeChat" FromRole="typeChat" ToRole="conversation" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="iduser" />
+          </Key>
+          <Property Name="iduser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="gameUsers" Relationship="Self.FK_gameUser_user" FromRole="user" ToRole="gameUser" />
+          <NavigationProperty Name="messages" Relationship="Self.FK_message_user" FromRole="user" ToRole="message" />
+          <NavigationProperty Name="userConversations" Relationship="Self.FK_userConversation_user" FromRole="user" ToRole="userConversation" />
+        </EntityType>
+        <EntityType Name="userConversation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idChat" Type="Int32" Nullable="false" />
+          <Property Name="idUsername" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="conversation" Relationship="Self.FK_userConversation_conversation" FromRole="userConversation" ToRole="conversation" />
+          <NavigationProperty Name="user" Relationship="Self.FK_userConversation_user" FromRole="userConversation" ToRole="user" />
+        </EntityType>
+        <Association Name="FK_conversation_typeChat">
+          <End Role="typeChat" Type="Self.typeChat" Multiplicity="1" />
+          <End Role="conversation" Type="Self.conversation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="typeChat">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="conversation">
+              <PropertyRef Name="idTypeChat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_message_conversation">
+          <End Role="conversation" Type="Self.conversation" Multiplicity="1" />
+          <End Role="message" Type="Self.message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="conversation">
+              <PropertyRef Name="idConversation" />
+            </Principal>
+            <Dependent Role="message">
+              <PropertyRef Name="idConversationMssg" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userConversation_conversation">
+          <End Role="conversation" Type="Self.conversation" Multiplicity="1" />
+          <End Role="userConversation" Type="Self.userConversation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="conversation">
+              <PropertyRef Name="idConversation" />
+            </Principal>
+            <Dependent Role="userConversation">
+              <PropertyRef Name="idChat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_gameUser_gamePlayed">
+          <End Role="gamePlayed" Type="Self.gamePlayed" Multiplicity="1" />
+          <End Role="gameUser" Type="Self.gameUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gamePlayed">
+              <PropertyRef Name="idGame" />
+            </Principal>
+            <Dependent Role="gameUser">
+              <PropertyRef Name="idGamePlayed" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_gameUser_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="gameUser" Type="Self.gameUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="iduser" />
+            </Principal>
+            <Dependent Role="gameUser">
+              <PropertyRef Name="idGamer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_message_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="message" Type="Self.message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="iduser" />
+            </Principal>
+            <Dependent Role="message">
+              <PropertyRef Name="idUserMssg" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_userConversation_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="userConversation" Type="Self.userConversation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="iduser" />
+            </Principal>
+            <Dependent Role="userConversation">
+              <PropertyRef Name="idUsername" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="gameRound">
+          <End Role="gamePlayed" Type="Self.gamePlayed" Multiplicity="*" />
+          <End Role="round" Type="Self.round" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="bastaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="conversations" EntityType="Self.conversation" />
+          <EntitySet Name="gamePlayeds" EntityType="Self.gamePlayed" />
+          <EntitySet Name="gameUsers" EntityType="Self.gameUser" />
+          <EntitySet Name="messages" EntityType="Self.message" />
+          <EntitySet Name="rounds" EntityType="Self.round" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="typeChats" EntityType="Self.typeChat" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <EntitySet Name="userConversations" EntityType="Self.userConversation" />
+          <AssociationSet Name="FK_conversation_typeChat" Association="Self.FK_conversation_typeChat">
+            <End Role="typeChat" EntitySet="typeChats" />
+            <End Role="conversation" EntitySet="conversations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_message_conversation" Association="Self.FK_message_conversation">
+            <End Role="conversation" EntitySet="conversations" />
+            <End Role="message" EntitySet="messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userConversation_conversation" Association="Self.FK_userConversation_conversation">
+            <End Role="conversation" EntitySet="conversations" />
+            <End Role="userConversation" EntitySet="userConversations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_gameUser_gamePlayed" Association="Self.FK_gameUser_gamePlayed">
+            <End Role="gamePlayed" EntitySet="gamePlayeds" />
+            <End Role="gameUser" EntitySet="gameUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_gameUser_user" Association="Self.FK_gameUser_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="gameUser" EntitySet="gameUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_message_user" Association="Self.FK_message_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="message" EntitySet="messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_userConversation_user" Association="Self.FK_userConversation_user">
+            <End Role="user" EntitySet="users" />
+            <End Role="userConversation" EntitySet="userConversations" />
+          </AssociationSet>
+          <AssociationSet Name="gameRound" Association="Self.gameRound">
+            <End Role="gamePlayed" EntitySet="gamePlayeds" />
+            <End Role="round" EntitySet="rounds" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bastaModelStoreContainer" CdmEntityContainer="bastaEntities">
+          <EntitySetMapping Name="conversations">
+            <EntityTypeMapping TypeName="bastaModel.conversation">
+              <MappingFragment StoreEntitySet="conversation">
+                <ScalarProperty Name="idConversation" ColumnName="idConversation" />
+                <ScalarProperty Name="dateConversation" ColumnName="dateConversation" />
+                <ScalarProperty Name="idTypeChat" ColumnName="idTypeChat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="gamePlayeds">
+            <EntityTypeMapping TypeName="bastaModel.gamePlayed">
+              <MappingFragment StoreEntitySet="gamePlayed">
+                <ScalarProperty Name="idGame" ColumnName="idGame" />
+                <ScalarProperty Name="dateGame" ColumnName="dateGame" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="gameUsers">
+            <EntityTypeMapping TypeName="bastaModel.gameUser">
+              <MappingFragment StoreEntitySet="gameUser">
+                <ScalarProperty Name="idGameUser" ColumnName="idGameUser" />
+                <ScalarProperty Name="idGamer" ColumnName="idGamer" />
+                <ScalarProperty Name="idGamePlayed" ColumnName="idGamePlayed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="messages">
+            <EntityTypeMapping TypeName="bastaModel.message">
+              <MappingFragment StoreEntitySet="message">
+                <ScalarProperty Name="idMessage" ColumnName="idMessage" />
+                <ScalarProperty Name="idUserMssg" ColumnName="idUserMssg" />
+                <ScalarProperty Name="idConversationMssg" ColumnName="idConversationMssg" />
+                <ScalarProperty Name="message1" ColumnName="message" />
+                <ScalarProperty Name="dateMssg" ColumnName="dateMssg" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rounds">
+            <EntityTypeMapping TypeName="bastaModel.round">
+              <MappingFragment StoreEntitySet="round">
+                <ScalarProperty Name="idRound" ColumnName="idRound" />
+                <ScalarProperty Name="numRound" ColumnName="numRound" />
+                <ScalarProperty Name="punctuation" ColumnName="punctuation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="bastaModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="typeChats">
+            <EntityTypeMapping TypeName="bastaModel.typeChat">
+              <MappingFragment StoreEntitySet="typeChat">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="bastaModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="iduser" ColumnName="iduser" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userConversations">
+            <EntityTypeMapping TypeName="bastaModel.userConversation">
+              <MappingFragment StoreEntitySet="userConversation">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idChat" ColumnName="idChat" />
+                <ScalarProperty Name="idUsername" ColumnName="idUsername" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="gameRound" TypeName="bastaModel.gameRound" StoreEntitySet="gameRound">
+            <EndProperty Name="gamePlayed">
+              <ScalarProperty Name="idGame" ColumnName="idGamePlayed" />
+            </EndProperty>
+            <EndProperty Name="round">
+              <ScalarProperty Name="idRound" ColumnName="idRoundPlayed" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
