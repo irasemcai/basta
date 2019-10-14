@@ -1,0 +1,12 @@
+C:\Users\survi\Desktop\basta\juegoBasta\bin\Debug\juegoBasta.dll.config
+C:\Users\survi\Desktop\basta\juegoBasta\bin\Debug\juegoBasta.dll
+C:\Users\survi\Desktop\basta\juegoBasta\bin\Debug\juegoBasta.pdb
+C:\Users\survi\Desktop\basta\juegoBasta\bin\Debug\EntityFramework.dll
+C:\Users\survi\Desktop\basta\juegoBasta\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\survi\Desktop\basta\juegoBasta\bin\Debug\EntityFramework.xml
+C:\Users\survi\Desktop\basta\juegoBasta\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\survi\Desktop\basta\juegoBasta\obj\Debug\juegoBasta.csprojAssemblyReference.cache
+C:\Users\survi\Desktop\basta\juegoBasta\obj\Debug\juegoBasta.csproj.CoreCompileInputs.cache
+C:\Users\survi\Desktop\basta\juegoBasta\obj\Debug\juegoBasta.csproj.CopyComplete
+C:\Users\survi\Desktop\basta\juegoBasta\obj\Debug\juegoBasta.dll
+C:\Users\survi\Desktop\basta\juegoBasta\obj\Debug\juegoBasta.pdb

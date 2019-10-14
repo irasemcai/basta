@@ -1,0 +1,13 @@
+C:\Users\survi\Desktop\basta\HostServiceBasta\bin\Debug\HostServiceBasta.exe.config
+C:\Users\survi\Desktop\basta\HostServiceBasta\bin\Debug\HostServiceBasta.exe
+C:\Users\survi\Desktop\basta\HostServiceBasta\bin\Debug\HostServiceBasta.pdb
+C:\Users\survi\Desktop\basta\HostServiceBasta\obj\Debug\HostServiceBasta.csprojAssemblyReference.cache
+C:\Users\survi\Desktop\basta\HostServiceBasta\obj\Debug\HostServiceBasta.csproj.CoreCompileInputs.cache
+C:\Users\survi\Desktop\basta\HostServiceBasta\obj\Debug\HostServiceBasta.exe
+C:\Users\survi\Desktop\basta\HostServiceBasta\obj\Debug\HostServiceBasta.pdb
+C:\Users\survi\Desktop\basta\HostServiceBasta\bin\Debug\juegoBasta.dll
+C:\Users\survi\Desktop\basta\HostServiceBasta\bin\Debug\EntityFramework.dll
+C:\Users\survi\Desktop\basta\HostServiceBasta\bin\Debug\juegoBasta.pdb
+C:\Users\survi\Desktop\basta\HostServiceBasta\bin\Debug\juegoBasta.dll.config
+C:\Users\survi\Desktop\basta\HostServiceBasta\bin\Debug\EntityFramework.xml
+C:\Users\survi\Desktop\basta\HostServiceBasta\obj\Debug\HostServiceBasta.csproj.CopyComplete

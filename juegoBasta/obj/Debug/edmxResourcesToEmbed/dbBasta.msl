@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="bastaModelStoreContainer" CdmEntityContainer="bastaEntities">
+    <EntitySetMapping Name="conversations">
+      <EntityTypeMapping TypeName="bastaModel.conversation">
+        <MappingFragment StoreEntitySet="conversation">
+          <ScalarProperty Name="idConversation" ColumnName="idConversation" />
+          <ScalarProperty Name="dateConversation" ColumnName="dateConversation" />
+          <ScalarProperty Name="idTypeChat" ColumnName="idTypeChat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="gamePlayeds">
+      <EntityTypeMapping TypeName="bastaModel.gamePlayed">
+        <MappingFragment StoreEntitySet="gamePlayed">
+          <ScalarProperty Name="idGame" ColumnName="idGame" />
+          <ScalarProperty Name="dateGame" ColumnName="dateGame" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="gameUsers">
+      <EntityTypeMapping TypeName="bastaModel.gameUser">
+        <MappingFragment StoreEntitySet="gameUser">
+          <ScalarProperty Name="idGameUser" ColumnName="idGameUser" />
+          <ScalarProperty Name="idGamer" ColumnName="idGamer" />
+          <ScalarProperty Name="idGamePlayed" ColumnName="idGamePlayed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="messages">
+      <EntityTypeMapping TypeName="bastaModel.message">
+        <MappingFragment StoreEntitySet="message">
+          <ScalarProperty Name="idMessage" ColumnName="idMessage" />
+          <ScalarProperty Name="idUserMssg" ColumnName="idUserMssg" />
+          <ScalarProperty Name="idConversationMssg" ColumnName="idConversationMssg" />
+          <ScalarProperty Name="message1" ColumnName="message" />
+          <ScalarProperty Name="dateMssg" ColumnName="dateMssg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rounds">
+      <EntityTypeMapping TypeName="bastaModel.round">
+        <MappingFragment StoreEntitySet="round">
+          <ScalarProperty Name="idRound" ColumnName="idRound" />
+          <ScalarProperty Name="numRound" ColumnName="numRound" />
+          <ScalarProperty Name="punctuation" ColumnName="punctuation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="bastaModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="typeChats">
+      <EntityTypeMapping TypeName="bastaModel.typeChat">
+        <MappingFragment StoreEntitySet="typeChat">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="bastaModel.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="iduser" ColumnName="iduser" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="userConversations">
+      <EntityTypeMapping TypeName="bastaModel.userConversation">
+        <MappingFragment StoreEntitySet="userConversation">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idChat" ColumnName="idChat" />
+          <ScalarProperty Name="idUsername" ColumnName="idUsername" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="gameRound" TypeName="bastaModel.gameRound" StoreEntitySet="gameRound">
+      <EndProperty Name="gamePlayed">
+        <ScalarProperty Name="idGame" ColumnName="idGamePlayed" />
+      </EndProperty>
+      <EndProperty Name="round">
+        <ScalarProperty Name="idRound" ColumnName="idRoundPlayed" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
