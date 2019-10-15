@@ -1,0 +1,16 @@
+﻿<Window x:Class="cliente.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:cliente"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TextBox HorizontalAlignment="Left" Height="24" Margin="26,108,0,0" TextWrapping="Wrap" Text="Nombre" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
+        <TextBox HorizontalAlignment="Left" Height="22" Margin="188,108,0,0" TextWrapping="Wrap" Text="Contraseña" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="379,107,0,0" TextWrapping="Wrap" Text="email" VerticalAlignment="Top" Width="120"/>
+        <Button Content="registrar" HorizontalAlignment="Left" Margin="275,186,0,0" VerticalAlignment="Top" Width="100" Height="32" Click="Button_Click"/>
+
+    </Grid>
+</Window>
