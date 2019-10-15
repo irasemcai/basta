@@ -27,7 +27,7 @@ namespace cliente
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            ServiceBasta.IServiceBasta serviceBasta;
         }
     }
     }
