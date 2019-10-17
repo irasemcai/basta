@@ -15,13 +15,23 @@ namespace juegoBasta
 
         public void AgregarUsuario (string name, string password, string email)
         {
+            
             Usuario usuario = new Usuario();
             user user = new user();
 
             user.name = name;
             user.password = password;
             user.email = email;
-            usuario.agregarEntidad(user);
+            bool resultado = usuario.agregarEntidad(user);
+            if (resultado == true)
+            {
+                Console.WriteLine("correcto");
+            }
+            else
+            {
+                Console.WriteLine("NO");
+
+            }
         }
 
 

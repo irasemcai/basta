@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ServiceModel;
 
 namespace cliente
 {
@@ -27,7 +28,29 @@ namespace cliente
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ServiceBasta.IServiceBasta serviceBasta;
+            ServiceBasta.ServiceBastaClient bastaClient = new ServiceBasta.ServiceBastaClient();
+            
+
+            string nombre = this.textBoxNombre.Text;
+            string contrasena = this.textBoxContraseña.Text;
+            string email = this.textBoxEmail.Text;
+
+            bastaClient.AgregarUsuario(nombre, contrasena, email);
+            /*
+            MessageService.User user = new MessageService.User();
+
+            MessageService.UserManagerClient client = new MessageService.UserManagerClient();
+
+            user.UserName = "Pedro";
+            user.LastName = "Sanchez";
+            Console.WriteLine("Response from server: {0}", client.AddUser(user));
+
+            */
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
     }

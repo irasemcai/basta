@@ -1,0 +1,15 @@
+C:\Users\survi\Desktop\basta\cliente\obj\Debug\cliente.csprojAssemblyReference.cache
+C:\Users\survi\Desktop\basta\cliente\obj\Debug\MainWindow.g.cs
+C:\Users\survi\Desktop\basta\cliente\obj\Debug\App.g.cs
+C:\Users\survi\Desktop\basta\cliente\obj\Debug\cliente_MarkupCompile.cache
+C:\Users\survi\Desktop\basta\cliente\obj\Debug\cliente_MarkupCompile.lref
+C:\Users\survi\Desktop\basta\cliente\bin\Debug\cliente.exe.config
+C:\Users\survi\Desktop\basta\cliente\bin\Debug\cliente.exe
+C:\Users\survi\Desktop\basta\cliente\bin\Debug\cliente.pdb
+C:\Users\survi\Desktop\basta\cliente\obj\Debug\MainWindow.baml
+C:\Users\survi\Desktop\basta\cliente\obj\Debug\cliente.g.resources
+C:\Users\survi\Desktop\basta\cliente\obj\Debug\cliente.Properties.Resources.resources
+C:\Users\survi\Desktop\basta\cliente\obj\Debug\cliente.csproj.GenerateResource.cache
+C:\Users\survi\Desktop\basta\cliente\obj\Debug\cliente.csproj.CoreCompileInputs.cache
+C:\Users\survi\Desktop\basta\cliente\obj\Debug\cliente.exe
+C:\Users\survi\Desktop\basta\cliente\obj\Debug\cliente.pdb
