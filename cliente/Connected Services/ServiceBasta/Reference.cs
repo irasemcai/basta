@@ -15,6 +15,12 @@ namespace cliente.ServiceBasta {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceBasta.IServiceBasta")]
     public interface IServiceBasta {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBasta/PruebaConeccion", ReplyAction="http://tempuri.org/IServiceBasta/PruebaConeccionResponse")]
+        string PruebaConeccion(int valor);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBasta/PruebaConeccion", ReplyAction="http://tempuri.org/IServiceBasta/PruebaConeccionResponse")]
+        System.Threading.Tasks.Task<string> PruebaConeccionAsync(int valor);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBasta/AgregarUsuario", ReplyAction="http://tempuri.org/IServiceBasta/AgregarUsuarioResponse")]
         void AgregarUsuario(string name, string password, string email);
         
@@ -47,6 +53,14 @@ namespace cliente.ServiceBasta {
         
         public ServiceBastaClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        public string PruebaConeccion(int valor) {
+            return base.Channel.PruebaConeccion(valor);
+        }
+        
+        public System.Threading.Tasks.Task<string> PruebaConeccionAsync(int valor) {
+            return base.Channel.PruebaConeccionAsync(valor);
         }
         
         public void AgregarUsuario(string name, string password, string email) {

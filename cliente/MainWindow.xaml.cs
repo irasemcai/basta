@@ -13,45 +13,123 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ServiceModel;
+using System.Threading;
+using Aspose.Cells.Drawing;
+
 
 namespace cliente
 {
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+   // [CallbackBehavior(UseSynchronizationContext = false)]
+    public partial class MainWindow : Window  //, ServiceBasta.IServiceBastaCallback
     {
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        /*
+        public void NotificarUsuarioAgregado(bool resultado)
+        {
+            String mensaje = " ";
+            String titulo = "registro de usuario";
+            MessageBoxButton boton = MessageBoxButton.OK;
+            MessageBox.Show(mensaje, titulo, boton);
+            this.Dispatcher.BeginInvoke(new ThreadStart(() => mensaje = resultado.ToString()));
+        }
+        */
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ServiceBasta.ServiceBastaClient bastaClient = new ServiceBasta.ServiceBastaClient();
-            
+            ServiceBasta.ServiceBastaClient serviceBasta = null;
 
-            string nombre = this.textBoxNombre.Text;
-            string contrasena = this.textBoxContraseña.Text;
-            string email = this.textBoxEmail.Text;
+            try
+            {
+                serviceBasta = new ServiceBasta.ServiceBastaClient();
 
-            bastaClient.AgregarUsuario(nombre, contrasena, email);
-            /*
-            MessageService.User user = new MessageService.User();
+                string nombre = this.textBoxNombre.Text;
+                string contrasena = this.textBoxContraseña.Text;
+                string email = this.textBoxEmail.Text;
 
-            MessageService.UserManagerClient client = new MessageService.UserManagerClient();
+                serviceBasta.AgregarUsuario(nombre, contrasena, email);
+                String mensaje = "Registro exitoso";
+                String titulo = "registro de usuario";
+                MessageBoxButton boton = MessageBoxButton.OK;
+                MessageBox.Show(mensaje, titulo, boton);
 
-            user.UserName = "Pedro";
-            user.LastName = "Sanchez";
-            Console.WriteLine("Response from server: {0}", client.AddUser(user));
+                //  serviceBasta.AgregarUsuario();
+            }
+            catch (CommunicationException exception)
+            {
+                serviceBasta.Abort();
+                String mensaje = "Error de conexión con el servidor: " + exception.Message;
+                String titulo = "registro de usuario";
+                MessageBoxButton boton = MessageBoxButton.OK;
+                MessageBox.Show(mensaje, titulo, boton);
+            }
+            catch (TimeoutException exception)
+            {
+                serviceBasta.Abort();
+                String mensaje = "Tiempo Excedido: "+ exception.Message;
+                String titulo = "registro de usuario";
+                MessageBoxButton boton = MessageBoxButton.OK;
+                MessageBox.Show(mensaje, titulo, boton);
+            }
+            finally
+            {
+                if(serviceBasta != null)
+                {
+                    if(serviceBasta.State == CommunicationState.Faulted)
+                    valor.Text = "aborto";
+                    serviceBasta.Abort();
+                }
+                else
+                {
+                    serviceBasta.Close();
+                }
+            }
 
-            */
+            /*using (ServiceBasta.ServiceBastaClient client = new ServiceBasta.ServiceBastaClient())
+            {
+                                String mensaje = "holo";
+                String titulo = "registro de usuario";
+                MessageBoxButton boton = MessageBoxButton.OK;
+                MessageBox.Show(mensaje, titulo, boton);
+                
+            }  */
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            using (ServiceBasta.ServiceBastaClient client = new ServiceBasta.ServiceBastaClient())
+            {
+                
+                valor.Text = client.PruebaConeccion(int.Parse(textBoxPrueba.Text));
+            }
+        }
+
+        private void TextBoxPrueba_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBoxContraseña_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBoxEmail_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
+
+    
     }
 

@@ -35,6 +35,12 @@
       <xsd:import schemaLocation="http://localhost:8081/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IServiceBasta_PruebaConeccion_InputMessage">
+    <wsdl:part name="parameters" element="tns:PruebaConeccion" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBasta_PruebaConeccion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PruebaConeccionResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceBasta_AgregarUsuario_InputMessage">
     <wsdl:part name="parameters" element="tns:AgregarUsuario" />
   </wsdl:message>
@@ -42,6 +48,10 @@
     <wsdl:part name="parameters" element="tns:AgregarUsuarioResponse" />
   </wsdl:message>
   <wsdl:portType name="IServiceBasta">
+    <wsdl:operation name="PruebaConeccion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBasta/PruebaConeccion" message="tns:IServiceBasta_PruebaConeccion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBasta/PruebaConeccionResponse" message="tns:IServiceBasta_PruebaConeccion_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="AgregarUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceBasta/AgregarUsuario" message="tns:IServiceBasta_AgregarUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceBasta/AgregarUsuarioResponse" message="tns:IServiceBasta_AgregarUsuario_OutputMessage" />
@@ -50,6 +60,15 @@
   <wsdl:binding name="NetTcpBinding_IServiceBasta" type="tns:IServiceBasta">
     <wsp:PolicyReference URI="#NetTcpBinding_IServiceBasta_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="PruebaConeccion">
+      <soap12:operation soapAction="http://tempuri.org/IServiceBasta/PruebaConeccion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AgregarUsuario">
       <soap12:operation soapAction="http://tempuri.org/IServiceBasta/AgregarUsuario" style="document" />
       <wsdl:input>

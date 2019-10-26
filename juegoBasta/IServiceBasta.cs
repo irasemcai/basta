@@ -1,22 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 
 namespace juegoBasta
 {
-    // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de interfaz "IService1" en el código y en el archivo de configuración a la vez.
     [ServiceContract]
-    public interface IServiceBasta
+    interface IServiceBasta
     {
         [OperationContract]
-        void AgregarUsuario (string name, string password, string email);
+        string PruebaConeccion(int valor);
 
-        /*[OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
-        */
+        [OperationContract]
+        void AgregarUsuario(string name, string password, string email);
 
-        // TODO: agregue aquí sus operaciones de servicio
     }
+    /*
+    interface IServiceBastaCallback
+    {
+        [OperationContract(IsOneWay = true)]
+        void NotificarUsuarioAgregado(bool resultado);
+    }*/
 }

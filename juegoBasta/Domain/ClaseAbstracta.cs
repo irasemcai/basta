@@ -19,6 +19,6 @@ namespace juegoBasta.Domain
             entidades = new bastaEntities();
         }
 
-        public abstract bool agregarEntidad (T entidad);
+        public abstract int AgregarEntidad (T entidad);
     }
 }

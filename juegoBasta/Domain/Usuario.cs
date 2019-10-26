@@ -8,11 +8,11 @@ namespace juegoBasta.Domain
 {
     class Usuario : ClaseAbstracta<user>
     {
-        public override bool agregarEntidad (user entidad)
+        public override int AgregarEntidad (user entidad)
         {
-            bool resultado = true; ;
+            int resultado;
             entidades.users.Add(entidad);
-            entidades.SaveChanges();
+            resultado = entidades.SaveChanges();
             return resultado;
         }
     }

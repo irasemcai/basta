@@ -8,9 +8,12 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <TextBox x:Name="textBoxNombre" HorizontalAlignment="Left" Height="24" Margin="26,108,0,0" TextWrapping="Wrap" Text="Nombre" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
-        <TextBox x:Name="textBoxContraseña" HorizontalAlignment="Left" Height="22" Margin="188,108,0,0" TextWrapping="Wrap" Text="Contraseña" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textBoxEmail" HorizontalAlignment="Left" Height="23" Margin="379,107,0,0" TextWrapping="Wrap" Text="email" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBoxContraseña" HorizontalAlignment="Left" Height="22" Margin="188,108,0,0" TextWrapping="Wrap" Text="Contraseña" VerticalAlignment="Top" Width="120" TextChanged="TextBoxContraseña_TextChanged"/>
+        <TextBox x:Name="textBoxEmail" HorizontalAlignment="Left" Height="23" Margin="379,107,0,0" TextWrapping="Wrap" Text="email" VerticalAlignment="Top" Width="120" TextChanged="TextBoxEmail_TextChanged"/>
         <Button Content="Registrar" HorizontalAlignment="Left" Margin="275,186,0,0" VerticalAlignment="Top" Width="100" Height="32" Click="Button_Click"/>
+        <Button Content="Probar" HorizontalAlignment="Left" Margin="26,39,0,0" VerticalAlignment="Top" Width="76" Click="Button_Click_1"/>
+        <TextBox x:Name="textBoxPrueba" HorizontalAlignment="Left" Height="23" Margin="232,39,0,0" TextWrapping="Wrap" Text="numero" VerticalAlignment="Top" Width="120" TextChanged="TextBoxPrueba_TextChanged"/>
+        <TextBlock x:Name="valor" HorizontalAlignment="Left" Margin="455,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="valor"/><LineBreak/><Run/></TextBlock>
 
     </Grid>
 </Window>

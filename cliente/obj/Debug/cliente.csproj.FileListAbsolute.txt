@@ -13,3 +13,6 @@ C:\Users\survi\Desktop\basta\cliente\obj\Debug\cliente.csproj.GenerateResource.c
 C:\Users\survi\Desktop\basta\cliente\obj\Debug\cliente.csproj.CoreCompileInputs.cache
 C:\Users\survi\Desktop\basta\cliente\obj\Debug\cliente.exe
 C:\Users\survi\Desktop\basta\cliente\obj\Debug\cliente.pdb
+C:\Users\survi\Desktop\basta\cliente\bin\Debug\Aspose.Cells.dll
+C:\Users\survi\Desktop\basta\cliente\bin\Debug\Aspose.Cells.xml
+C:\Users\survi\Desktop\basta\cliente\obj\Debug\cliente.csproj.CopyComplete

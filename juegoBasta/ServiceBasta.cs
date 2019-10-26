@@ -9,9 +9,11 @@ using juegoBasta.Domain;
 namespace juegoBasta
 {
     // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de clase "Service1" en el código y en el archivo de configuración a la vez.
+    //[ServiceBehavior(ConcurrencyMode= ConcurrencyMode.Reentrant)]
     public class ServiceBasta : IServiceBasta
     {
-      
+        Type providerService = typeof(System.Data.Entity.SqlServer.SqlProviderServices);
+       // IServiceBastaCallback serviceBastaCallback = null;
 
         public void AgregarUsuario (string name, string password, string email)
         {
@@ -22,16 +24,15 @@ namespace juegoBasta
             user.name = name;
             user.password = password;
             user.email = email;
-            bool resultado = usuario.agregarEntidad(user);
-            if (resultado == true)
-            {
-                Console.WriteLine("correcto");
-            }
-            else
-            {
-                Console.WriteLine("NO");
+            usuario.AgregarEntidad(user);
+            
+            //Console.WriteLine(resultado);
+           // OperationContext.Current.GetCallbackChannel<IServiceBastaCallback>().NotificarUsuarioAgregado(resultado);
+        }
 
-            }
+        public string PruebaConeccion(int valor)
+        {
+            return "regresó valor " + valor + "en srvidor";
         }
 
 
@@ -49,4 +50,30 @@ namespace juegoBasta
             return composite;
         }*/
     }
+    /*
+    public static class WcfExtensions
+    {
+        public static void Using<T>(this T client, Action<T> work)
+            where T : ICommunicationObject
+        {
+            try
+            {
+                work(client);
+                client.Close();
+            }
+            catch (CommunicationException e)
+            {
+                client.Abort();
+            }
+            catch (TimeoutException e)
+            {
+                client.Abort();
+            }
+            catch (Exception e)
+            {
+                client.Abort();
+                throw;
+            }
+        }
+    }*/
 }
