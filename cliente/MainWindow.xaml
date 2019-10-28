@@ -1,19 +1,21 @@
-﻿<Window x:Class="cliente.MainWindow"
+﻿<Window x:Name="RegistroUsuario" x:Class="cliente.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:cliente"
+        xmlns:p="clr-namespace:cliente.Properties"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <TextBox x:Name="textBoxNombre" HorizontalAlignment="Left" Height="24" Margin="26,108,0,0" TextWrapping="Wrap" Text="Nombre" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
-        <TextBox x:Name="textBoxContraseña" HorizontalAlignment="Left" Height="22" Margin="188,108,0,0" TextWrapping="Wrap" Text="Contraseña" VerticalAlignment="Top" Width="120" TextChanged="TextBoxContraseña_TextChanged"/>
-        <TextBox x:Name="textBoxEmail" HorizontalAlignment="Left" Height="23" Margin="379,107,0,0" TextWrapping="Wrap" Text="email" VerticalAlignment="Top" Width="120" TextChanged="TextBoxEmail_TextChanged"/>
-        <Button Content="Registrar" HorizontalAlignment="Left" Margin="275,186,0,0" VerticalAlignment="Top" Width="100" Height="32" Click="Button_Click"/>
-        <Button Content="Probar" HorizontalAlignment="Left" Margin="26,39,0,0" VerticalAlignment="Top" Width="76" Click="Button_Click_1"/>
-        <TextBox x:Name="textBoxPrueba" HorizontalAlignment="Left" Height="23" Margin="232,39,0,0" TextWrapping="Wrap" Text="numero" VerticalAlignment="Top" Width="120" TextChanged="TextBoxPrueba_TextChanged"/>
-        <TextBlock x:Name="valor" HorizontalAlignment="Left" Margin="455,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="valor"/><LineBreak/><Run/></TextBlock>
+        Title="Crear Usuario" Height="450" Width="800">
+    <Grid Background="#FF1A1D40">
+        <TextBox x:Name="textBoxNombre" HorizontalAlignment="Left" Height="24" Margin="214,92,0,0" TextWrapping="Wrap" Text="Nombre de usuario" VerticalAlignment="Top" Width="376" TextChanged="TextBox_TextChanged" FontFamily="Arial"/>
+        <TextBox x:Name="textBoxContraseña" HorizontalAlignment="Left" Height="22" Margin="214,160,0,0" TextWrapping="Wrap" Text="Contraseña" VerticalAlignment="Top" Width="376" TextChanged="TextBoxContraseña_TextChanged" FontFamily="Arial"/>
+        <TextBox x:Name="textBoxEmail" HorizontalAlignment="Left" Height="23" Margin="214,225,0,0" TextWrapping="Wrap" Text="Correo electrónico" VerticalAlignment="Top" Width="376" TextChanged="TextBoxEmail_TextChanged" FontFamily="Arial"/>
+        <Button x:Name="buttonRegistrar" Content="Registrarme" HorizontalAlignment="Left" Margin="322,308,0,0" VerticalAlignment="Top" Width="160" Height="50" Click="Button_Click" Background="#FF6600CC" RenderTransformOrigin="1.04,0.703" FontFamily="Yu Gothic UI Semibold" FontSize="22" Foreground="#FFFFFDFD"/>
+        <Button x:Name="buttonProbar" Content="Probar" HorizontalAlignment="Left" Margin="26,230,0,0" VerticalAlignment="Top" Width="76" Click="Button_Click_1"/>
+        <TextBox x:Name="textBoxPrueba" HorizontalAlignment="Left" Height="22" Margin="26,278,0,0" TextWrapping="Wrap" Text="numero" VerticalAlignment="Top" Width="120" TextChanged="TextBoxPrueba_TextChanged"/>
+        <TextBlock x:Name="valor" HorizontalAlignment="Left" Margin="48,329,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31"><Run Text="valor"/><LineBreak/><Run/></TextBlock>
+        <TextBlock x:Name="TittleCrearUsuario" HorizontalAlignment="Left" Margin="290,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FF00CCCC" FontFamily="Segoe UI Semibold" FontSize="36" Height="39" Width="226"><Run Text="Crear Usuario"/><LineBreak/><Run/></TextBlock>
 
     </Grid>
 </Window>
