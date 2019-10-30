@@ -47,6 +47,12 @@
   <wsdl:message name="IServiceBasta_AgregarUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:AgregarUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceBasta_IniciarSesion_InputMessage">
+    <wsdl:part name="parameters" element="tns:IniciarSesion" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBasta_IniciarSesion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IniciarSesionResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceBasta">
     <wsdl:operation name="PruebaConeccion">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceBasta/PruebaConeccion" message="tns:IServiceBasta_PruebaConeccion_InputMessage" />
@@ -55,6 +61,10 @@
     <wsdl:operation name="AgregarUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceBasta/AgregarUsuario" message="tns:IServiceBasta_AgregarUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceBasta/AgregarUsuarioResponse" message="tns:IServiceBasta_AgregarUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IniciarSesion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBasta/IniciarSesion" message="tns:IServiceBasta_IniciarSesion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBasta/IniciarSesionResponse" message="tns:IServiceBasta_IniciarSesion_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IServiceBasta" type="tns:IServiceBasta">
@@ -71,6 +81,15 @@
     </wsdl:operation>
     <wsdl:operation name="AgregarUsuario">
       <soap12:operation soapAction="http://tempuri.org/IServiceBasta/AgregarUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IniciarSesion">
+      <soap12:operation soapAction="http://tempuri.org/IServiceBasta/IniciarSesion" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

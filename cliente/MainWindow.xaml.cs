@@ -53,10 +53,15 @@ namespace cliente
                 string email = this.textBoxEmail.Text;
 
                 serviceBasta.AgregarUsuario(nombre, contrasena, email);
+
+                CuentaDeUsuario ventanaCuentaDeUsuario = new CuentaDeUsuario();
+                ventanaCuentaDeUsuario.Show();
+                this.Close();
+                /*
                 String mensaje = "Registro exitoso";
                 String titulo = "registro de usuario";
                 MessageBoxButton boton = MessageBoxButton.OK;
-                MessageBox.Show(mensaje, titulo, boton);
+                MessageBox.Show(mensaje, titulo, boton);*/
 
                 //  serviceBasta.AgregarUsuario();
             }
@@ -97,7 +102,8 @@ namespace cliente
                 MessageBoxButton boton = MessageBoxButton.OK;
                 MessageBox.Show(mensaje, titulo, boton);
                 
-            }  */
+            }  */            
+            
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -111,6 +117,7 @@ namespace cliente
             {
                 
                 valor.Text = client.PruebaConeccion(int.Parse(textBoxPrueba.Text));
+                
             }
         }
 
@@ -126,6 +133,14 @@ namespace cliente
 
         private void TextBoxEmail_TextChanged(object sender, TextChangedEventArgs e)
         {
+
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            InicioSesion ventanaInicioSesion = new InicioSesion();
+            ventanaInicioSesion.Show();
+            this.Close();
 
         }
     }

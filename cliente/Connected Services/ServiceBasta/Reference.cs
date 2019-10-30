@@ -26,6 +26,12 @@ namespace cliente.ServiceBasta {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBasta/AgregarUsuario", ReplyAction="http://tempuri.org/IServiceBasta/AgregarUsuarioResponse")]
         System.Threading.Tasks.Task AgregarUsuarioAsync(string name, string password, string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBasta/IniciarSesion", ReplyAction="http://tempuri.org/IServiceBasta/IniciarSesionResponse")]
+        bool IniciarSesion(string nombre, string contrasena);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBasta/IniciarSesion", ReplyAction="http://tempuri.org/IServiceBasta/IniciarSesionResponse")]
+        System.Threading.Tasks.Task<bool> IniciarSesionAsync(string nombre, string contrasena);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -69,6 +75,14 @@ namespace cliente.ServiceBasta {
         
         public System.Threading.Tasks.Task AgregarUsuarioAsync(string name, string password, string email) {
             return base.Channel.AgregarUsuarioAsync(name, password, email);
+        }
+        
+        public bool IniciarSesion(string nombre, string contrasena) {
+            return base.Channel.IniciarSesion(nombre, contrasena);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IniciarSesionAsync(string nombre, string contrasena) {
+            return base.Channel.IniciarSesionAsync(nombre, contrasena);
         }
     }
 }

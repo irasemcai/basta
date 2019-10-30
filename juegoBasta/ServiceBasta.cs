@@ -30,6 +30,20 @@ namespace juegoBasta
            // OperationContext.Current.GetCallbackChannel<IServiceBastaCallback>().NotificarUsuarioAgregado(resultado);
         }
 
+        public bool IniciarSesion(string nombre, string contrasena)
+        {
+            Usuario usuario = new Usuario();
+            bool resultado = usuario.IniciarSesion(nombre, contrasena);
+            if (resultado)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public string PruebaConeccion(int valor)
         {
             return "regresó valor " + valor + "en srvidor";

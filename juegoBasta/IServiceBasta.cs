@@ -16,6 +16,9 @@ namespace juegoBasta
         [OperationContract]
         void AgregarUsuario(string name, string password, string email);
 
+        [OperationContract]
+        bool IniciarSesion(string nombre, string contrasena);
+
     }
     /*
     interface IServiceBastaCallback
