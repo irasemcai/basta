@@ -14,7 +14,7 @@
         <Button x:Name="buttonRegistrar" Content="Registrarme" HorizontalAlignment="Left" Margin="322,308,0,0" VerticalAlignment="Top" Width="160" Height="50" Click="Button_Click" Background="#FF6600CC" RenderTransformOrigin="1.04,0.703" FontFamily="Yu Gothic UI Semibold" FontSize="22" Foreground="#FFFFFDFD"/>
         <Button x:Name="buttonProbar" Content="Probar" HorizontalAlignment="Left" Margin="26,230,0,0" VerticalAlignment="Top" Width="76" Click="Button_Click_1"/>
         <TextBox x:Name="textBoxPrueba" HorizontalAlignment="Left" Height="22" Margin="26,278,0,0" TextWrapping="Wrap" Text="numero" VerticalAlignment="Top" Width="120" TextChanged="TextBoxPrueba_TextChanged"/>
-        <TextBlock x:Name="valor" HorizontalAlignment="Left" Margin="48,329,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31"><Run Text="valor"/><LineBreak/><Run/></TextBlock>
+        <TextBlock x:Name="textBlockvalor" HorizontalAlignment="Left" Margin="48,329,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31"><Run Text="valor"/><LineBreak/><Run/></TextBlock>
         <TextBlock x:Name="TittleCrearUsuario" HorizontalAlignment="Left" Margin="290,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FF00CCCC" FontFamily="Segoe UI Semibold" FontSize="36" Height="39" Width="226"><Run Text="Crear Usuario"/><LineBreak/><Run/></TextBlock>
         <Button Content="ya tengo cuenta" HorizontalAlignment="Left" Margin="650,39,0,0" VerticalAlignment="Top" Width="106" Height="41" Click="Button_Click_2"/>
 

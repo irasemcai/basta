@@ -22,9 +22,11 @@ namespace cliente
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
-   // [CallbackBehavior(UseSynchronizationContext = false)]
-    public partial class MainWindow : Window  //, ServiceBasta.IServiceBastaCallback
+    [CallbackBehavior(UseSynchronizationContext = false)]
+
+    public partial class MainWindow : Window, ServiceBasta.IServiceBastaCallback
     {
+
         public MainWindow()
         {
             InitializeComponent();
@@ -46,24 +48,17 @@ namespace cliente
 
             try
             {
-                serviceBasta = new ServiceBasta.ServiceBastaClient();
+                InstanceContext context = new InstanceContext(this);
+                serviceBasta = new ServiceBasta.ServiceBastaClient(context);
 
                 string nombre = this.textBoxNombre.Text;
                 string contrasena = this.textBoxContraseña.Text;
                 string email = this.textBoxEmail.Text;
 
                 serviceBasta.AgregarUsuario(nombre, contrasena, email);
-
                 CuentaDeUsuario ventanaCuentaDeUsuario = new CuentaDeUsuario();
                 ventanaCuentaDeUsuario.Show();
                 this.Close();
-                /*
-                String mensaje = "Registro exitoso";
-                String titulo = "registro de usuario";
-                MessageBoxButton boton = MessageBoxButton.OK;
-                MessageBox.Show(mensaje, titulo, boton);*/
-
-                //  serviceBasta.AgregarUsuario();
             }
             catch (CommunicationException exception)
             {
@@ -86,7 +81,7 @@ namespace cliente
                 if(serviceBasta != null)
                 {
                     if(serviceBasta.State == CommunicationState.Faulted)
-                    valor.Text = "aborto";
+                    //valor.Text = "aborto";
                     serviceBasta.Abort();
                 }
                 else
@@ -113,12 +108,35 @@ namespace cliente
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            using (ServiceBasta.ServiceBastaClient client = new ServiceBasta.ServiceBastaClient())
+
+            ServiceBasta.ServiceBastaClient client = null;
+            try
             {
-                
-                valor.Text = client.PruebaConeccion(int.Parse(textBoxPrueba.Text));
-                
+                InstanceContext context = new InstanceContext(this);
+                client = new ServiceBasta.ServiceBastaClient(context);
+                string valor = this.textBoxPrueba.Text;
+               int numero= int.Parse(valor);
+                client.PruebaConeccion(numero);
+
             }
+            catch(TimeoutException exception)
+            {
+                client.Abort();
+                String mensaje = "Tiempo Excedido: " + exception.Message;
+                String titulo = "prueba";
+                MessageBoxButton boton = MessageBoxButton.OK;
+                MessageBox.Show(mensaje, titulo, boton);
+
+            }
+            catch(CommunicationException exception)
+            {
+                client.Abort();
+                String mensaje = "Error de comunicacion " + exception.Message;
+                String titulo = "prueba";
+                MessageBoxButton boton = MessageBoxButton.OK;
+                MessageBox.Show(mensaje, titulo, boton);
+            }
+          
         }
 
         private void TextBoxPrueba_TextChanged(object sender, TextChangedEventArgs e)
@@ -142,6 +160,19 @@ namespace cliente
             ventanaInicioSesion.Show();
             this.Close();
 
+        }
+
+        public void ContestarPrueba(int valor)
+        {
+            this.Dispatcher.BeginInvoke(new ThreadStart(() => textBlockvalor.Text= valor.ToString()));
+        }
+
+        public void NotificarUsuarioAgregado(int resultado)
+        {                        
+            String mensaje = "¡Bienvenido!";
+            String titulo = "registro de usuario"+ resultado;
+            MessageBoxButton boton = MessageBoxButton.OK;
+            MessageBox.Show(mensaje, titulo, boton);
         }
     }
 

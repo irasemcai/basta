@@ -7,23 +7,29 @@ using System.Text;
 
 namespace juegoBasta
 {
-    [ServiceContract]
+    [ServiceContract(CallbackContract = typeof(IBastaCallback))]
     interface IServiceBasta
     {
-        [OperationContract]
-        string PruebaConeccion(int valor);
+        [OperationContract (IsOneWay = true)]
+        void PruebaConeccion(int valor);
 
-        [OperationContract]
+        [OperationContract (IsOneWay =true)]
         void AgregarUsuario(string name, string password, string email);
 
         [OperationContract]
         bool IniciarSesion(string nombre, string contrasena);
 
+        [OperationContract]
+        void UnirseALobby(); 
+
     }
-    /*
-    interface IServiceBastaCallback
+    
+    interface IBastaCallback
     {
         [OperationContract(IsOneWay = true)]
-        void NotificarUsuarioAgregado(bool resultado);
-    }*/
+        void ContestarPrueba(int valor);
+
+        [OperationContract(IsOneWay = true)]
+        void NotificarUsuarioAgregado(int resultado);
+    }
 }

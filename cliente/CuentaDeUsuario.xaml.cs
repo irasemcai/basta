@@ -30,5 +30,12 @@ namespace cliente
             ventanaInicioSesion.Show();
             this.Close();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Lobby ventanaLobby = new Lobby();
+            ventanaLobby.Show();
+            this.Close();
+        }
     }
 }

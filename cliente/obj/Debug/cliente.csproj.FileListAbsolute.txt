@@ -20,3 +20,5 @@ C:\Users\survi\Desktop\basta\cliente\obj\Debug\InicioSesion.g.cs
 C:\Users\survi\Desktop\basta\cliente\obj\Debug\InicioSesion.baml
 C:\Users\survi\Desktop\basta\cliente\obj\Debug\CuentaDeUsuario.g.cs
 C:\Users\survi\Desktop\basta\cliente\obj\Debug\CuentaDeUsuario.baml
+C:\Users\survi\Desktop\basta\cliente\obj\Debug\Lobby.g.cs
+C:\Users\survi\Desktop\basta\cliente\obj\Debug\Lobby.baml

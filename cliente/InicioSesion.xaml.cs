@@ -24,12 +24,14 @@ namespace cliente
         {
             InitializeComponent();
         }
-
+        
         private void Button_Click(object sender, RoutedEventArgs e)
-        {
+        { 
+            /*
             ServiceBasta.ServiceBastaClient serviceBastaClient = null;
             string nombreDeUsuario = textBoxNombreDeUsuario.Text;
             string contrasena = textBoxContrasena.Text;
+            
 
             try
             {
@@ -57,7 +59,7 @@ namespace cliente
             {
                 MessageBox.Show("Ha ocurrido un error de comunicacion con el servidor "+ exception);
             }
-            
+            */
         }
 
         private void ButtonRegresar_Click(object sender, RoutedEventArgs e)
@@ -67,4 +69,5 @@ namespace cliente
             this.Close();
         }
     }
-}
+    }
+
