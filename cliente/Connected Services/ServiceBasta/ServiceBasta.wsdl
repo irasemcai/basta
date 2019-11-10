@@ -29,6 +29,35 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IServiceBastaSala_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8081/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -44,14 +73,26 @@
   <wsdl:message name="IServiceBasta_IniciarSesion_InputMessage">
     <wsdl:part name="parameters" element="tns:IniciarSesion" />
   </wsdl:message>
-  <wsdl:message name="IServiceBasta_IniciarSesion_OutputMessage">
-    <wsdl:part name="parameters" element="tns:IniciarSesionResponse" />
-  </wsdl:message>
   <wsdl:message name="IServiceBasta_ContestarPrueba_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ContestarPrueba" />
   </wsdl:message>
   <wsdl:message name="IServiceBasta_NotificarUsuarioAgregado_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarUsuarioAgregado" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBasta_NotificarSesionIniciada_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarSesionIniciada" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBastaSala_CrearSalaEspera_InputMessage">
+    <wsdl:part name="parameters" element="tns:CrearSalaEspera" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBastaSala_UnirseASala_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnirseASala" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBastaSala_NotificarUsuarioEnSalaEspera_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotificarUsuarioEnSalaEspera" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBastaSala_ImprimirUsuarioAgregadoSala_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ImprimirUsuarioAgregadoSala" />
   </wsdl:message>
   <wsdl:portType name="IServiceBasta">
     <wsdl:operation name="PruebaConeccion">
@@ -62,13 +103,29 @@
     </wsdl:operation>
     <wsdl:operation name="IniciarSesion">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceBasta/IniciarSesion" message="tns:IServiceBasta_IniciarSesion_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBasta/IniciarSesionResponse" message="tns:IServiceBasta_IniciarSesion_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ContestarPrueba">
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceBasta/ContestarPrueba" message="tns:IServiceBasta_ContestarPrueba_OutputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="NotificarUsuarioAgregado">
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceBasta/NotificarUsuarioAgregado" message="tns:IServiceBasta_NotificarUsuarioAgregado_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarSesionIniciada">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBasta/NotificarSesionIniciada" message="tns:IServiceBasta_NotificarSesionIniciada_OutputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IServiceBastaSala">
+    <wsdl:operation name="CrearSalaEspera">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBastaSala/CrearSalaEspera" message="tns:IServiceBastaSala_CrearSalaEspera_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UnirseASala">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBastaSala/UnirseASala" message="tns:IServiceBastaSala_UnirseASala_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotificarUsuarioEnSalaEspera">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBastaSala/NotificarUsuarioEnSalaEspera" message="tns:IServiceBastaSala_NotificarUsuarioEnSalaEspera_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ImprimirUsuarioAgregadoSala">
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBastaSala/ImprimirUsuarioAgregadoSala" message="tns:IServiceBastaSala_ImprimirUsuarioAgregadoSala_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IServiceBasta" type="tns:IServiceBasta">
@@ -91,9 +148,6 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ContestarPrueba">
       <soap12:operation soapAction="http://tempuri.org/IServiceBasta/ContestarPrueba" style="document" />
@@ -107,9 +161,52 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="NotificarSesionIniciada">
+      <soap12:operation soapAction="http://tempuri.org/IServiceBasta/NotificarSesionIniciada" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IServiceBastaSala" type="tns:IServiceBastaSala">
+    <wsp:PolicyReference URI="#NetTcpBinding_IServiceBastaSala_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="CrearSalaEspera">
+      <soap12:operation soapAction="http://tempuri.org/IServiceBastaSala/CrearSalaEspera" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="UnirseASala">
+      <soap12:operation soapAction="http://tempuri.org/IServiceBastaSala/UnirseASala" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarUsuarioEnSalaEspera">
+      <soap12:operation soapAction="http://tempuri.org/IServiceBastaSala/NotificarUsuarioEnSalaEspera" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImprimirUsuarioAgregadoSala">
+      <soap12:operation soapAction="http://tempuri.org/IServiceBastaSala/ImprimirUsuarioAgregadoSala" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="ServiceBasta">
     <wsdl:port name="NetTcpBinding_IServiceBasta" binding="tns:NetTcpBinding_IServiceBasta">
+      <soap12:address location="net.tcp://localhost:8090/juegoBasta" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8090/juegoBasta</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>DESKTOP-FLLKC20\irasema</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IServiceBastaSala" binding="tns:NetTcpBinding_IServiceBastaSala">
       <soap12:address location="net.tcp://localhost:8090/juegoBasta" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/juegoBasta</wsa10:Address>

@@ -8,6 +8,17 @@ namespace juegoBasta.Domain
 {
     class Usuario : ClaseAbstracta<user>
     {
+        private user user;
+
+        public Usuario()
+        {
+        }
+
+        public Usuario(user user)
+        {
+            this.user = user;
+        }
+
         public override int AgregarEntidad (user entidad)
         {
             
@@ -29,6 +40,22 @@ namespace juegoBasta.Domain
             {
                 return false;
             }
+        }
+
+        public Usuario ObtenerUsuarioPorNombre(string nombre)
+        {
+            bool resultado = entidades.users.Any(x => x.name == nombre);
+            if (resultado)
+            {
+              user user= entidades.users.Find(nombre);
+                Usuario usuario = new Usuario(user);
+                return usuario;
+            }
+            else
+            {
+                return null;
+            }
+           
         }
     }
 }

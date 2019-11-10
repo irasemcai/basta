@@ -24,13 +24,6 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="IniciarSesionResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="IniciarSesionResult" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="ContestarPrueba">
     <xs:complexType>
       <xs:sequence>
@@ -42,6 +35,43 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="resultado" type="xs:int" />
+        <xs:element minOccurs="0" name="resultadoCorreo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarSesionIniciada">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="resultado" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CrearSalaEspera">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nombre" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="limiteParticipantes" type="xs:int" />
+        <xs:element minOccurs="0" name="anfitrion" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnirseASala">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificarUsuarioEnSalaEspera">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="resultado" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ImprimirUsuarioAgregadoSala">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nombreUsuario" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

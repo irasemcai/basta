@@ -22,3 +22,5 @@ C:\Users\survi\Desktop\basta\cliente\obj\Debug\CuentaDeUsuario.g.cs
 C:\Users\survi\Desktop\basta\cliente\obj\Debug\CuentaDeUsuario.baml
 C:\Users\survi\Desktop\basta\cliente\obj\Debug\Lobby.g.cs
 C:\Users\survi\Desktop\basta\cliente\obj\Debug\Lobby.baml
+C:\Users\survi\Desktop\basta\cliente\obj\Debug\NuevaSalaEspera.g.cs
+C:\Users\survi\Desktop\basta\cliente\obj\Debug\NuevaSalaEspera.baml

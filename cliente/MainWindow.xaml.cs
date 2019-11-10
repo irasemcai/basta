@@ -56,6 +56,7 @@ namespace cliente
                 string email = this.textBoxEmail.Text;
 
                 serviceBasta.AgregarUsuario(nombre, contrasena, email);
+                
                 CuentaDeUsuario ventanaCuentaDeUsuario = new CuentaDeUsuario();
                 ventanaCuentaDeUsuario.Show();
                 this.Close();
@@ -167,10 +168,16 @@ namespace cliente
             this.Dispatcher.BeginInvoke(new ThreadStart(() => textBlockvalor.Text= valor.ToString()));
         }
 
-        public void NotificarUsuarioAgregado(int resultado)
-        {                        
-            String mensaje = "¡Bienvenido!";
-            String titulo = "registro de usuario"+ resultado;
+
+        public void NotificarSesionIniciada(bool resultado)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void NotificarUsuarioAgregado(int resultado, string resultadoCorreo)
+        {
+            String mensaje = "¡Bienvenido!" + resultado + " " + resultadoCorreo;
+            String titulo = "registro de usuario";
             MessageBoxButton boton = MessageBoxButton.OK;
             MessageBox.Show(mensaje, titulo, boton);
         }

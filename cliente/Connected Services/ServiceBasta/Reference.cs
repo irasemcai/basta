@@ -27,11 +27,11 @@ namespace cliente.ServiceBasta {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBasta/AgregarUsuario")]
         System.Threading.Tasks.Task AgregarUsuarioAsync(string name, string password, string email);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBasta/IniciarSesion", ReplyAction="http://tempuri.org/IServiceBasta/IniciarSesionResponse")]
-        bool IniciarSesion(string nombre, string contrasena);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBasta/IniciarSesion")]
+        void IniciarSesion(string nombre, string contrasena);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBasta/IniciarSesion", ReplyAction="http://tempuri.org/IServiceBasta/IniciarSesionResponse")]
-        System.Threading.Tasks.Task<bool> IniciarSesionAsync(string nombre, string contrasena);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBasta/IniciarSesion")]
+        System.Threading.Tasks.Task IniciarSesionAsync(string nombre, string contrasena);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -41,7 +41,10 @@ namespace cliente.ServiceBasta {
         void ContestarPrueba(int valor);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBasta/NotificarUsuarioAgregado")]
-        void NotificarUsuarioAgregado(int resultado);
+        void NotificarUsuarioAgregado(int resultado, string resultadoCorreo);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBasta/NotificarSesionIniciada")]
+        void NotificarSesionIniciada(bool resultado);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -88,12 +91,84 @@ namespace cliente.ServiceBasta {
             return base.Channel.AgregarUsuarioAsync(name, password, email);
         }
         
-        public bool IniciarSesion(string nombre, string contrasena) {
-            return base.Channel.IniciarSesion(nombre, contrasena);
+        public void IniciarSesion(string nombre, string contrasena) {
+            base.Channel.IniciarSesion(nombre, contrasena);
         }
         
-        public System.Threading.Tasks.Task<bool> IniciarSesionAsync(string nombre, string contrasena) {
+        public System.Threading.Tasks.Task IniciarSesionAsync(string nombre, string contrasena) {
             return base.Channel.IniciarSesionAsync(nombre, contrasena);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceBasta.IServiceBastaSala", CallbackContract=typeof(cliente.ServiceBasta.IServiceBastaSalaCallback))]
+    public interface IServiceBastaSala {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBastaSala/CrearSalaEspera")]
+        void CrearSalaEspera(string nombre, int limiteParticipantes, string anfitrion);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBastaSala/CrearSalaEspera")]
+        System.Threading.Tasks.Task CrearSalaEsperaAsync(string nombre, int limiteParticipantes, string anfitrion);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBastaSala/UnirseASala")]
+        void UnirseASala();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBastaSala/UnirseASala")]
+        System.Threading.Tasks.Task UnirseASalaAsync();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IServiceBastaSalaCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBastaSala/NotificarUsuarioEnSalaEspera")]
+        void NotificarUsuarioEnSalaEspera(string nombreUsuario, bool resultado);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBastaSala/ImprimirUsuarioAgregadoSala")]
+        void ImprimirUsuarioAgregadoSala(string nombreUsuario);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IServiceBastaSalaChannel : cliente.ServiceBasta.IServiceBastaSala, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ServiceBastaSalaClient : System.ServiceModel.DuplexClientBase<cliente.ServiceBasta.IServiceBastaSala>, cliente.ServiceBasta.IServiceBastaSala {
+        
+        public ServiceBastaSalaClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public ServiceBastaSalaClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public ServiceBastaSalaClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public ServiceBastaSalaClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public ServiceBastaSalaClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void CrearSalaEspera(string nombre, int limiteParticipantes, string anfitrion) {
+            base.Channel.CrearSalaEspera(nombre, limiteParticipantes, anfitrion);
+        }
+        
+        public System.Threading.Tasks.Task CrearSalaEsperaAsync(string nombre, int limiteParticipantes, string anfitrion) {
+            return base.Channel.CrearSalaEsperaAsync(nombre, limiteParticipantes, anfitrion);
+        }
+        
+        public void UnirseASala() {
+            base.Channel.UnirseASala();
+        }
+        
+        public System.Threading.Tasks.Task UnirseASalaAsync() {
+            return base.Channel.UnirseASalaAsync();
         }
     }
 }

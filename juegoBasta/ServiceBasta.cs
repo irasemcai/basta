@@ -11,7 +11,7 @@ namespace juegoBasta
     // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de clase "Service1" en el código y en el archivo de configuración a la vez.
     //[ServiceBehavior(ConcurrencyMode= ConcurrencyMode.Reentrant)]
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single, InstanceContextMode = InstanceContextMode.Single)]
-    public class ServiceBasta : IServiceBasta
+    public class ServiceBasta : IServiceBasta, IServiceBastaSala
     {
         Type providerService = typeof(System.Data.Entity.SqlServer.SqlProviderServices);
        // IServiceBastaCallback serviceBastaCallback = null;
@@ -26,21 +26,27 @@ namespace juegoBasta
             user.password = password;
             user.email = email;
             int resultado = usuario.AgregarEntidad(user);
-            bastaCallback.NotificarUsuarioAgregado(resultado);
+            MensajeCorreo mensajeCorreo = new MensajeCorreo();
+            string resultadoCorreo = mensajeCorreo.EnviarCorreo(email);
+            bastaCallback.NotificarUsuarioAgregado(resultado, resultadoCorreo);
         }
 
-        public bool IniciarSesion(string nombre, string contrasena)
+        public void CrearSalaEspera(string nombre, int limiteParticipantes, string anfitrion)
         {
+            IBastaSalaCallback bastaSalaCallbabk = OperationContext.Current.GetCallbackChannel<IBastaSalaCallback>();
+            SalaDeEspera salaDeEspera = new SalaDeEspera(nombre, limiteParticipantes, anfitrion);
+            bool resultado= salaDeEspera.agregarUsuarioASala(anfitrion);
+               
+                bastaSalaCallbabk.NotificarUsuarioEnSalaEspera(anfitrion, resultado);
+        }
+
+        public void IniciarSesion(string nombre, string contrasena)
+        {
+            IBastaCallback bastaCallback = OperationContext.Current.GetCallbackChannel<IBastaCallback>();
             Usuario usuario = new Usuario();
             bool resultado = usuario.IniciarSesion(nombre, contrasena);
-            if (resultado)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+
+            bastaCallback.NotificarSesionIniciada(resultado);     
         }
 
         public void PruebaConeccion(int valor)
@@ -49,6 +55,11 @@ namespace juegoBasta
             IBastaCallback bastaCallback = OperationContext.Current.GetCallbackChannel<IBastaCallback>();
             int resultado = valor + 2;
             bastaCallback.ContestarPrueba(resultado);
+        }
+
+        public void UnirseASala()
+        {
+            throw new NotImplementedException();
         }
 
 
@@ -66,30 +77,4 @@ namespace juegoBasta
             return composite;
         }*/
     }
-    /*
-    public static class WcfExtensions
-    {
-        public static void Using<T>(this T client, Action<T> work)
-            where T : ICommunicationObject
-        {
-            try
-            {
-                work(client);
-                client.Close();
-            }
-            catch (CommunicationException e)
-            {
-                client.Abort();
-            }
-            catch (TimeoutException e)
-            {
-                client.Abort();
-            }
-            catch (Exception e)
-            {
-                client.Abort();
-                throw;
-            }
-        }
-    }*/
 }

@@ -33,8 +33,8 @@ namespace cliente
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Lobby ventanaLobby = new Lobby();
-            ventanaLobby.Show();
+            NuevaSalaEspera ventanaNuevaSalaEspera = new NuevaSalaEspera();
+            ventanaNuevaSalaEspera.Show();
             this.Close();
         }
     }

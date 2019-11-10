@@ -80,6 +80,8 @@
       <DependentUpon>dbBasta.edmx</DependentUpon>
     </Compile>
     <Compile Include="Domain\ClaseAbstracta.cs" />
+    <Compile Include="Domain\MensajeCorreo.cs" />
+    <Compile Include="Domain\SalaDeEspera.cs" />
     <Compile Include="Domain\Usuario.cs" />
     <Compile Include="gamePlayed.cs">
       <DependentUpon>dbBasta.tt</DependentUpon>
@@ -88,6 +90,7 @@
       <DependentUpon>dbBasta.tt</DependentUpon>
     </Compile>
     <Compile Include="IServiceBasta.cs" />
+    <Compile Include="IServiceBastaSala.cs" />
     <Compile Include="message.cs">
       <DependentUpon>dbBasta.tt</DependentUpon>
     </Compile>
