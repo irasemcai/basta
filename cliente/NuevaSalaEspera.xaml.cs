@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.ServiceModel;
 using System.Threading;
+using cliente.ServiceBasta;
+
 
 namespace cliente
 {
@@ -32,16 +34,33 @@ namespace cliente
             throw new NotImplementedException();
         }
 
-        public void NotificarUsuarioEnSalaEspera(string nombreUsuario, bool resultado)
+        public void NotificarUsuarioEnSalaEspera(SalaDeEspera salaDeEspera)
         {
-           this.Dispatcher.BeginInvoke(new ThreadStart(() => textboxCajaParticipantes.Text = nombreUsuario.ToString()));
-           String mensaje = "¡Bienvenido!";
-            String titulo = "sala nueva"+ resultado;
-            MessageBoxButton boton = MessageBoxButton.OK;
-            MessageBox.Show(mensaje, titulo, boton);
-        }
+            //Object[] jugadores = salaDeEspera.JugadoresEnEspera;
+            if(salaDeEspera != null)
+            {
+                foreach (Usuario u in salaDeEspera.JugadoresEnEspera)
+                {
 
-       
+                    this.Dispatcher.BeginInvoke(new ThreadStart(() => textboxCajaParticipantes.Text = u.ToString()));
+                }
+
+                String mensaje = "¡Bienvenido! Esta es una sala que has creado";
+                String titulo = "sala nueva";
+                MessageBoxButton boton = MessageBoxButton.OK;
+                MessageBox.Show(mensaje, titulo, boton);
+
+            }
+            else
+            {
+                String mensaje = "hubo algun error";
+                String titulo = "sala nueva";
+                MessageBoxButton boton = MessageBoxButton.OK;
+                MessageBox.Show(mensaje, titulo, boton);
+            }
+            
+
+        }
 
         private void ButtonAgregarSala_Click(object sender, RoutedEventArgs e)
         {           
@@ -51,12 +70,15 @@ namespace cliente
                 InstanceContext instanceContext = new InstanceContext(this);
                 serviceBastaClient = new ServiceBasta.ServiceBastaSalaClient(instanceContext);
 
-                string nombreSala = textboxNombreSala.Text;
+                string id= textboxIdSala.Text;
+                int idSala = int.Parse(id);
                 string limite = textboxNumParticipantes.Text;
                 string nombreAnfitrion = textboxNombreUsuario.Text;
+
+                
                 int numParticipantes = int.Parse(limite);
                
-                serviceBastaClient.CrearSalaEspera(nombreSala, numParticipantes, nombreAnfitrion);
+                serviceBastaClient.CrearSalaEspera(idSala, numParticipantes, nombreAnfitrion);
             }
             catch (CommunicationException excepcion)
             {

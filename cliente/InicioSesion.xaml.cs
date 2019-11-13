@@ -18,8 +18,8 @@ namespace cliente
     /// <summary>
     /// Lógica de interacción para InicioSesion.xaml
     /// </summary>
-    [CallbackBehavior(UseSynchronizationContext = false)]
-    public partial class InicioSesion : Window, ServiceBasta.IServiceBastaCallback
+   // [CallbackBehavior(UseSynchronizationContext = false)]
+    public partial class InicioSesion : Window
     {
         public InicioSesion()
         {
@@ -28,31 +28,43 @@ namespace cliente
         
         private void Button_Click(object sender, RoutedEventArgs e)
         {          
-            ServiceBasta.ServiceBastaClient serviceBastaClient = null;          
+            ServiceBasta.ServiceLoginClient serviceInicioSesion = null;          
             try
             {
-                InstanceContext instanceContext = new InstanceContext(this);
-                serviceBastaClient = new ServiceBasta.ServiceBastaClient(instanceContext);
+               // InstanceContext instanceContext = new InstanceContext(this);
+                serviceInicioSesion = new ServiceBasta.ServiceLoginClient();
+
                 string nombreDeUsuario = textBoxNombreDeUsuario.Text;
                 string contrasena = textBoxContrasena.Text;
-                serviceBastaClient.IniciarSesion(nombreDeUsuario, contrasena);
-                CuentaDeUsuario cuentaDeUsuario = new CuentaDeUsuario();
-                cuentaDeUsuario.Show();
-                this.Close();
+                bool resultadoInicioSesion;
+
+                resultadoInicioSesion= serviceInicioSesion.InicioSesion(nombreDeUsuario, contrasena);
+
+                if (resultadoInicioSesion == true)
+                {
+                    CuentaDeUsuario cuentaDeUsuario = new CuentaDeUsuario();
+                    cuentaDeUsuario.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Usuario no existe" + resultadoInicioSesion);
+                }
+                
             }
             catch (CommunicationException exception)         
             {
-                serviceBastaClient.Abort();
+                serviceInicioSesion.Abort();
                 MessageBox.Show("Ha ocurrido un error de comunicacion con el servidor" + exception);
             }
             catch(TimeoutException exception)
             {
-                serviceBastaClient.Abort();
+                serviceInicioSesion.Abort();
                 MessageBox.Show("Ha ocurrido un error de comunicacion con el servidor "+ exception);
             }
             finally
             {
-                serviceBastaClient.Close();
+                serviceInicioSesion.Close();
             }
             
         }
@@ -64,34 +76,7 @@ namespace cliente
             this.Close();
         }
 
-        public void ContestarPrueba(int valor)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void NotificarSesionIniciada(bool resultado)
-        {
-            if (resultado==true)
-            {               
-               MessageBox.Show("Sesión Iniciada" + resultado);
-               // AbrirVentanaUsuario();
-                
-            }
-            else
-            {
-                MessageBox.Show("Usuario no existe" + resultado);
-            }
-        }
-
-        public void AbrirVentanaUsuario()
-        {
-            
-        }
-
-        public void NotificarUsuarioAgregado(int resultado, string resultadoCorreo)
-        {
-            throw new NotImplementedException();
-        }
+      
     }
     }
 

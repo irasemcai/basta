@@ -24,3 +24,5 @@ C:\Users\survi\Desktop\basta\cliente\obj\Debug\Lobby.g.cs
 C:\Users\survi\Desktop\basta\cliente\obj\Debug\Lobby.baml
 C:\Users\survi\Desktop\basta\cliente\obj\Debug\NuevaSalaEspera.g.cs
 C:\Users\survi\Desktop\basta\cliente\obj\Debug\NuevaSalaEspera.baml
+C:\Users\survi\Desktop\basta\cliente\obj\Debug\CodigoRegistro.g.cs
+C:\Users\survi\Desktop\basta\cliente\obj\Debug\CodigoRegistro.baml

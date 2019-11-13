@@ -1,4 +1,5 @@
 ﻿using System.ServiceModel;
+using juegoBasta.Domain;
 
 namespace juegoBasta
 {
@@ -6,17 +7,21 @@ namespace juegoBasta
     interface IServiceBastaSala
     {
         [OperationContract(IsOneWay = true)]
-        void CrearSalaEspera(string nombre, int limiteParticipantes, string anfitrion);
+        void CrearSalaEspera(int id, int limiteParticipantes, string anfitrion);
 
         [OperationContract(IsOneWay = true)]
-        void UnirseASala();
+        void UnirseASala(string nombreUsuario);
+
+        [OperationContract]
+        Usuario BuscarUsuarioPorNombre(string nombre);
+
 
     }
 
     interface IBastaSalaCallback
     {
         [OperationContract(IsOneWay = true)]
-        void NotificarUsuarioEnSalaEspera(string nombreUsuario, bool resultado);
+        void NotificarUsuarioEnSalaEspera(SalaDeEspera salaDeEspera);
 
         [OperationContract(IsOneWay = true)]
         void ImprimirUsuarioAgregadoSala(string nombreUsuario);

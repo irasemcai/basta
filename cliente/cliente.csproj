@@ -60,6 +60,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="CodigoRegistro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CuentaDeUsuario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -79,6 +83,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CodigoRegistro.xaml.cs">
+      <DependentUpon>CodigoRegistro.xaml</DependentUpon>
     </Compile>
     <Compile Include="Connected Services\ServiceBasta\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -124,10 +131,16 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\ServiceBasta\cliente.ServiceBasta.Usuario.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ServiceBasta\item.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceBasta\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceBasta\item2.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceBasta\ServiceBasta.wsdl" />

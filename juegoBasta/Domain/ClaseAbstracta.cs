@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace juegoBasta.Domain
 {
-    abstract class ClaseAbstracta<T>
+   public abstract class ClaseAbstracta<T>
     {
         protected bastaEntities entidades;
         public ClaseAbstracta()

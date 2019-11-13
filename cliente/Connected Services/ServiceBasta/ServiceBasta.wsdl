@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ServiceBasta" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
-  <wsp:Policy wsu:Id="NetTcpBinding_IServiceBasta_policy">
+  <wsp:Policy wsu:Id="NetTcpBinding_IServiceBastaCodigo_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
@@ -58,29 +58,47 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IServiceLogin_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8081/?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:8081/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8081/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/juegoBasta.Domain" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IServiceBasta_PruebaConeccion_InputMessage">
-    <wsdl:part name="parameters" element="tns:PruebaConeccion" />
+  <wsdl:message name="IServiceBastaCodigo_VerificarCodigoRegistro_InputMessage">
+    <wsdl:part name="parameters" element="tns:VerificarCodigoRegistro" />
   </wsdl:message>
-  <wsdl:message name="IServiceBasta_AgregarUsuario_InputMessage">
-    <wsdl:part name="parameters" element="tns:AgregarUsuario" />
-  </wsdl:message>
-  <wsdl:message name="IServiceBasta_IniciarSesion_InputMessage">
-    <wsdl:part name="parameters" element="tns:IniciarSesion" />
-  </wsdl:message>
-  <wsdl:message name="IServiceBasta_ContestarPrueba_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:ContestarPrueba" />
-  </wsdl:message>
-  <wsdl:message name="IServiceBasta_NotificarUsuarioAgregado_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotificarUsuarioAgregado" />
-  </wsdl:message>
-  <wsdl:message name="IServiceBasta_NotificarSesionIniciada_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotificarSesionIniciada" />
+  <wsdl:message name="IServiceBastaCodigo_VerificarCodigoRegistro_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VerificarCodigoRegistroResponse" />
   </wsdl:message>
   <wsdl:message name="IServiceBastaSala_CrearSalaEspera_InputMessage">
     <wsdl:part name="parameters" element="tns:CrearSalaEspera" />
@@ -88,30 +106,34 @@
   <wsdl:message name="IServiceBastaSala_UnirseASala_InputMessage">
     <wsdl:part name="parameters" element="tns:UnirseASala" />
   </wsdl:message>
+  <wsdl:message name="IServiceBastaSala_BuscarUsuarioPorNombre_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarUsuarioPorNombre" />
+  </wsdl:message>
+  <wsdl:message name="IServiceBastaSala_BuscarUsuarioPorNombre_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarUsuarioPorNombreResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceBastaSala_NotificarUsuarioEnSalaEspera_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:NotificarUsuarioEnSalaEspera" />
   </wsdl:message>
   <wsdl:message name="IServiceBastaSala_ImprimirUsuarioAgregadoSala_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ImprimirUsuarioAgregadoSala" />
   </wsdl:message>
-  <wsdl:portType name="IServiceBasta">
-    <wsdl:operation name="PruebaConeccion">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBasta/PruebaConeccion" message="tns:IServiceBasta_PruebaConeccion_InputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="AgregarUsuario">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBasta/AgregarUsuario" message="tns:IServiceBasta_AgregarUsuario_InputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="IniciarSesion">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBasta/IniciarSesion" message="tns:IServiceBasta_IniciarSesion_InputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="ContestarPrueba">
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBasta/ContestarPrueba" message="tns:IServiceBasta_ContestarPrueba_OutputCallbackMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="NotificarUsuarioAgregado">
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBasta/NotificarUsuarioAgregado" message="tns:IServiceBasta_NotificarUsuarioAgregado_OutputCallbackMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="NotificarSesionIniciada">
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBasta/NotificarSesionIniciada" message="tns:IServiceBasta_NotificarSesionIniciada_OutputCallbackMessage" />
+  <wsdl:message name="IServiceLogin_InicioSesion_InputMessage">
+    <wsdl:part name="parameters" element="tns:InicioSesion" />
+  </wsdl:message>
+  <wsdl:message name="IServiceLogin_InicioSesion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InicioSesionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceLogin_RegistrarUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegistrarUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServiceLogin_RegistrarUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegistrarUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IServiceBastaCodigo">
+    <wsdl:operation name="VerificarCodigoRegistro">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBastaCodigo/VerificarCodigoRegistro" message="tns:IServiceBastaCodigo_VerificarCodigoRegistro_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBastaCodigo/VerificarCodigoRegistroResponse" message="tns:IServiceBastaCodigo_VerificarCodigoRegistro_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IServiceBastaSala">
@@ -121,6 +143,10 @@
     <wsdl:operation name="UnirseASala">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceBastaSala/UnirseASala" message="tns:IServiceBastaSala_UnirseASala_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="BuscarUsuarioPorNombre">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceBastaSala/BuscarUsuarioPorNombre" message="tns:IServiceBastaSala_BuscarUsuarioPorNombre_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceBastaSala/BuscarUsuarioPorNombreResponse" message="tns:IServiceBastaSala_BuscarUsuarioPorNombre_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="NotificarUsuarioEnSalaEspera">
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceBastaSala/NotificarUsuarioEnSalaEspera" message="tns:IServiceBastaSala_NotificarUsuarioEnSalaEspera_OutputCallbackMessage" />
     </wsdl:operation>
@@ -128,41 +154,24 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceBastaSala/ImprimirUsuarioAgregadoSala" message="tns:IServiceBastaSala_ImprimirUsuarioAgregadoSala_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="NetTcpBinding_IServiceBasta" type="tns:IServiceBasta">
-    <wsp:PolicyReference URI="#NetTcpBinding_IServiceBasta_policy" />
+  <wsdl:portType name="IServiceLogin">
+    <wsdl:operation name="InicioSesion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceLogin/InicioSesion" message="tns:IServiceLogin_InicioSesion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceLogin/InicioSesionResponse" message="tns:IServiceLogin_InicioSesion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceLogin/RegistrarUsuario" message="tns:IServiceLogin_RegistrarUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceLogin/RegistrarUsuarioResponse" message="tns:IServiceLogin_RegistrarUsuario_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IServiceBastaCodigo" type="tns:IServiceBastaCodigo">
+    <wsp:PolicyReference URI="#NetTcpBinding_IServiceBastaCodigo_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="PruebaConeccion">
-      <soap12:operation soapAction="http://tempuri.org/IServiceBasta/PruebaConeccion" style="document" />
+    <wsdl:operation name="VerificarCodigoRegistro">
+      <soap12:operation soapAction="http://tempuri.org/IServiceBastaCodigo/VerificarCodigoRegistro" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-    </wsdl:operation>
-    <wsdl:operation name="AgregarUsuario">
-      <soap12:operation soapAction="http://tempuri.org/IServiceBasta/AgregarUsuario" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-    </wsdl:operation>
-    <wsdl:operation name="IniciarSesion">
-      <soap12:operation soapAction="http://tempuri.org/IServiceBasta/IniciarSesion" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-    </wsdl:operation>
-    <wsdl:operation name="ContestarPrueba">
-      <soap12:operation soapAction="http://tempuri.org/IServiceBasta/ContestarPrueba" style="document" />
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="NotificarUsuarioAgregado">
-      <soap12:operation soapAction="http://tempuri.org/IServiceBasta/NotificarUsuarioAgregado" style="document" />
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="NotificarSesionIniciada">
-      <soap12:operation soapAction="http://tempuri.org/IServiceBasta/NotificarSesionIniciada" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -183,6 +192,15 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="BuscarUsuarioPorNombre">
+      <soap12:operation soapAction="http://tempuri.org/IServiceBastaSala/BuscarUsuarioPorNombre" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="NotificarUsuarioEnSalaEspera">
       <soap12:operation soapAction="http://tempuri.org/IServiceBastaSala/NotificarUsuarioEnSalaEspera" style="document" />
       <wsdl:output>
@@ -196,8 +214,30 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IServiceLogin" type="tns:IServiceLogin">
+    <wsp:PolicyReference URI="#NetTcpBinding_IServiceLogin_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="InicioSesion">
+      <soap12:operation soapAction="http://tempuri.org/IServiceLogin/InicioSesion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrarUsuario">
+      <soap12:operation soapAction="http://tempuri.org/IServiceLogin/RegistrarUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="ServiceBasta">
-    <wsdl:port name="NetTcpBinding_IServiceBasta" binding="tns:NetTcpBinding_IServiceBasta">
+    <wsdl:port name="NetTcpBinding_IServiceBastaCodigo" binding="tns:NetTcpBinding_IServiceBastaCodigo">
       <soap12:address location="net.tcp://localhost:8090/juegoBasta" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/juegoBasta</wsa10:Address>
@@ -207,6 +247,15 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IServiceBastaSala" binding="tns:NetTcpBinding_IServiceBastaSala">
+      <soap12:address location="net.tcp://localhost:8090/juegoBasta" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8090/juegoBasta</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>DESKTOP-FLLKC20\irasema</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IServiceLogin" binding="tns:NetTcpBinding_IServiceLogin">
       <soap12:address location="net.tcp://localhost:8090/juegoBasta" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8090/juegoBasta</wsa10:Address>

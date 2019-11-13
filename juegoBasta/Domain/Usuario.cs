@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace juegoBasta.Domain
 {
-    class Usuario : ClaseAbstracta<user>
+    public class Usuario : ClaseAbstracta<user>
     {
         private user user;
+        
 
         public Usuario()
         {

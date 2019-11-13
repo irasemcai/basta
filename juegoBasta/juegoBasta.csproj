@@ -89,8 +89,9 @@
     <Compile Include="gameUser.cs">
       <DependentUpon>dbBasta.tt</DependentUpon>
     </Compile>
-    <Compile Include="IServiceBasta.cs" />
+    <Compile Include="IServiceBastaCodigo.cs" />
     <Compile Include="IServiceBastaSala.cs" />
+    <Compile Include="IServiceLogin.cs" />
     <Compile Include="message.cs">
       <DependentUpon>dbBasta.tt</DependentUpon>
     </Compile>

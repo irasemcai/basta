@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -37,5 +38,17 @@ namespace cliente
             ventanaNuevaSalaEspera.Show();
             this.Close();
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            ServiceBasta.ServiceBastaSalaClient serviceInicioSesion = null;
+
+
+            InstanceContext instanceContext = new InstanceContext(this);
+            serviceInicioSesion = new ServiceBasta.ServiceBastaSalaClient(instanceContext);
+
+
+        }
+            
     }
 }

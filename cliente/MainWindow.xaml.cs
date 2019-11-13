@@ -24,42 +24,41 @@ namespace cliente
     /// </summary>
     [CallbackBehavior(UseSynchronizationContext = false)]
 
-    public partial class MainWindow : Window, ServiceBasta.IServiceBastaCallback
+    public partial class MainWindow : Window
     {
 
         public MainWindow()
         {
             InitializeComponent();
         }
-
-        /*
-        public void NotificarUsuarioAgregado(bool resultado)
-        {
-            String mensaje = " ";
-            String titulo = "registro de usuario";
-            MessageBoxButton boton = MessageBoxButton.OK;
-            MessageBox.Show(mensaje, titulo, boton);
-            this.Dispatcher.BeginInvoke(new ThreadStart(() => mensaje = resultado.ToString()));
-        }
-        */
+       
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ServiceBasta.ServiceBastaClient serviceBasta = null;
+            ServiceBasta.ServiceLoginClient serviceBasta = null;
 
             try
             {
-                InstanceContext context = new InstanceContext(this);
-                serviceBasta = new ServiceBasta.ServiceBastaClient(context);
+                //InstanceContext context = new InstanceContext(this);
+                serviceBasta = new ServiceBasta.ServiceLoginClient();
 
                 string nombre = this.textBoxNombre.Text;
                 string contrasena = this.textBoxContraseña.Text;
                 string email = this.textBoxEmail.Text;
 
-                serviceBasta.AgregarUsuario(nombre, contrasena, email);
-                
-                CuentaDeUsuario ventanaCuentaDeUsuario = new CuentaDeUsuario();
-                ventanaCuentaDeUsuario.Show();
-                this.Close();
+                bool resultadoRegistro= serviceBasta.RegistrarUsuario(nombre, contrasena, email);
+                if (resultadoRegistro == true)
+                {
+                    CodigoRegistro ventanaCodigoRegistro = new CodigoRegistro();
+                    ventanaCodigoRegistro.Show();
+                    this.Close();
+                    /*
+               CuentaDeUsuario ventanaCuentaDeUsuario = new CuentaDeUsuario();
+               ventanaCuentaDeUsuario.Show();*/
+                }
+                else
+                {
+                    NotificarUsuarioAgregado();
+                }
             }
             catch (CommunicationException exception)
             {
@@ -81,25 +80,14 @@ namespace cliente
             {
                 if(serviceBasta != null)
                 {
-                    if(serviceBasta.State == CommunicationState.Faulted)
-                    //valor.Text = "aborto";
+                    if(serviceBasta.State == CommunicationState.Faulted)                 
                     serviceBasta.Abort();
                 }
                 else
                 {
                     serviceBasta.Close();
                 }
-            }
-
-            /*using (ServiceBasta.ServiceBastaClient client = new ServiceBasta.ServiceBastaClient())
-            {
-                                String mensaje = "holo";
-                String titulo = "registro de usuario";
-                MessageBoxButton boton = MessageBoxButton.OK;
-                MessageBox.Show(mensaje, titulo, boton);
-                
-            }  */            
-            
+            }         
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -107,43 +95,6 @@ namespace cliente
 
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
-            ServiceBasta.ServiceBastaClient client = null;
-            try
-            {
-                InstanceContext context = new InstanceContext(this);
-                client = new ServiceBasta.ServiceBastaClient(context);
-                string valor = this.textBoxPrueba.Text;
-               int numero= int.Parse(valor);
-                client.PruebaConeccion(numero);
-
-            }
-            catch(TimeoutException exception)
-            {
-                client.Abort();
-                String mensaje = "Tiempo Excedido: " + exception.Message;
-                String titulo = "prueba";
-                MessageBoxButton boton = MessageBoxButton.OK;
-                MessageBox.Show(mensaje, titulo, boton);
-
-            }
-            catch(CommunicationException exception)
-            {
-                client.Abort();
-                String mensaje = "Error de comunicacion " + exception.Message;
-                String titulo = "prueba";
-                MessageBoxButton boton = MessageBoxButton.OK;
-                MessageBox.Show(mensaje, titulo, boton);
-            }
-          
-        }
-
-        private void TextBoxPrueba_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
 
         private void TextBoxContraseña_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -163,21 +114,10 @@ namespace cliente
 
         }
 
-        public void ContestarPrueba(int valor)
+        public void NotificarUsuarioAgregado()
         {
-            this.Dispatcher.BeginInvoke(new ThreadStart(() => textBlockvalor.Text= valor.ToString()));
-        }
-
-
-        public void NotificarSesionIniciada(bool resultado)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void NotificarUsuarioAgregado(int resultado, string resultadoCorreo)
-        {
-            String mensaje = "¡Bienvenido!" + resultado + " " + resultadoCorreo;
-            String titulo = "registro de usuario";
+            String mensaje = "Falló el registro, porfavor intenta más tarde";
+            String titulo = "¡ups!";
             MessageBoxButton boton = MessageBoxButton.OK;
             MessageBox.Show(mensaje, titulo, boton);
         }
