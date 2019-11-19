@@ -79,7 +79,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbBasta.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Domain\ClaseAbstracta.cs" />
+    <Compile Include="Domain\Entidad.cs" />
     <Compile Include="Domain\MensajeCorreo.cs" />
     <Compile Include="Domain\SalaDeEspera.cs" />
     <Compile Include="Domain\Usuario.cs" />

@@ -1,23 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using cliente.ventanasExcepcion;
+using System;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace cliente
 {
-    /// <summary>
-    /// Lógica de interacción para CodigoRegistro.xaml
-    /// </summary>
     public partial class CodigoRegistro : Window
     {
         public CodigoRegistro()
@@ -27,19 +15,16 @@ namespace cliente
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ServiceBasta.ServiceBastaCodigoClient serviceBastaCodigoClient = null;
-
+            ServiceBasta.ServiceBastaCodigoClient ServiceBastaCodigoClient = null;
             try
             {
-                string codigotxt = textBoxCodigo.Text;
-                int codigoInt = int.Parse(codigotxt);
+                string Codigotxt = textBoxCodigo.Text;
+                int codigoInt = int.Parse(Codigotxt);
 
-                serviceBastaCodigoClient = new ServiceBasta.ServiceBastaCodigoClient();
-                bool resultadoCodigo;
+                ServiceBastaCodigoClient = new ServiceBasta.ServiceBastaCodigoClient();
+                bool ResultadoCodigo = ServiceBastaCodigoClient.VerificarCodigoRegistro(codigoInt);
 
-                resultadoCodigo = serviceBastaCodigoClient.VerificarCodigoRegistro(codigoInt);
-
-                if (resultadoCodigo == true)
+                if (ResultadoCodigo == true)
                 {
                     CuentaDeUsuario cuentaDeUsuario = new CuentaDeUsuario();
                     cuentaDeUsuario.Show();
@@ -47,34 +32,35 @@ namespace cliente
                 }
                 else
                 {
-                    String mensaje = "ups";
-                    String titulo = "el código es incorrecto. Intente de nuevo";
-                    MessageBoxButton boton = MessageBoxButton.OK;
-                    MessageBox.Show(mensaje, titulo, boton);
+                    NotificarCodigoIncorrecto();
                 }
             }
-            catch(TimeoutException excepcion)
+            catch(TimeoutException Excepcion)
             {
-                serviceBastaCodigoClient.Abort();
-                String mensaje = "Tiempo Excedido: " + excepcion.Message;
-                String titulo = "registro de usuario";
-                MessageBoxButton boton = MessageBoxButton.OK;
-                MessageBox.Show(mensaje, titulo, boton);
+                ServiceBastaCodigoClient.Abort();
+                NotificadorDeExcepcion Notificador = new NotificadorDeExcepcion();
+                Notificador.NotificarErrorTiempo(Excepcion);
 
             }
-            catch (CommunicationException excepcion)
+            catch (CommunicationException Excepcion)
             {
-                serviceBastaCodigoClient.Abort();
-                String mensaje = "Tiempo Excedido: " + excepcion.Message;
-                String titulo = "registro de usuario";
-                MessageBoxButton boton = MessageBoxButton.OK;
-                MessageBox.Show(mensaje, titulo, boton);
+                ServiceBastaCodigoClient.Abort();
+                NotificadorDeExcepcion Notificador = new NotificadorDeExcepcion();
+                Notificador.NotificarErrorComunicacion(Excepcion);
             }
         }
 
         private void TextBoxCodigo_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        public void NotificarCodigoIncorrecto()
+        {
+            String Titulo = "Código Incorrecto";
+            String Mensaje = "El código es incorrecto. Inténtalo de nuevo.";
+            MessageBoxButton Boton = MessageBoxButton.OK;
+            MessageBox.Show(Mensaje, Titulo, Boton);
         }
     }
 }

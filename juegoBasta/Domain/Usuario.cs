@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
+
 
 namespace juegoBasta.Domain
 {
-    public class Usuario : ClaseAbstracta<user>
+    public class Usuario : Entidad<user>
     {
-        private user user;
+        private user User;
         
 
         public Usuario()
@@ -17,25 +14,25 @@ namespace juegoBasta.Domain
 
         public Usuario(user user)
         {
-            this.user = user;
+            this.User = user;
         }
-
-        public override int AgregarEntidad (user entidad)
+        //agregar metodo obtener NOMBRE
+        public override int agregarEntidad (user Entidad)
         {
             
-            int resultado;
-            entidades.users.Add(entidad);
-            resultado = entidades.SaveChanges();
-            return resultado;
+            int Resultado;
+            Entidades.users.Add(Entidad);
+            Resultado = Entidades.SaveChanges();
+            return Resultado;
         }
 
-        public bool IniciarSesion(string nombreUsuario, string contrasena)
+        public bool iniciarSesion(string nombreUsuario, string contrasena)
         {
-            bool resultado = entidades.users.Any(x => x.name == nombreUsuario && x.password == contrasena);
-            if (resultado)
+            bool Resultado = Entidades.users.Any(x => x.name == nombreUsuario && x.password == contrasena);
+            if (Resultado)
             {
 
-                return resultado;
+                return true;
             }
             else
             {
@@ -43,14 +40,14 @@ namespace juegoBasta.Domain
             }
         }
 
-        public Usuario ObtenerUsuarioPorNombre(string nombre)
+        public Usuario obtenerUsuarioPorNombre(string Nombre)
         {
-            bool resultado = entidades.users.Any(x => x.name == nombre);
-            if (resultado)
+            bool Resultado = Entidades.users.Any(x => x.name == Nombre);
+            if (Resultado)
             {
-              user user= entidades.users.Find(nombre);
-                Usuario usuario = new Usuario(user);
-                return usuario;
+              user User= Entidades.users.Find(Nombre);
+                Usuario Usuario = new Usuario(User);
+                return Usuario;
             }
             else
             {

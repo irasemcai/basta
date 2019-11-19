@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Crear Usuario" Height="450" Width="800">
     <Grid Background="#FF1A1D40">
-        <TextBox x:Name="textBoxNombre" HorizontalAlignment="Left" Height="24" Margin="214,92,0,0" TextWrapping="Wrap" Text="Nombre de usuario" VerticalAlignment="Top" Width="376" TextChanged="TextBox_TextChanged" FontFamily="Arial"/>
+        <TextBox x:Name="textBoxNombre" HorizontalAlignment="Left" Height="24" Margin="214,92,0,0" TextWrapping="Wrap" Text="n" VerticalAlignment="Top" Width="376" TextChanged="TextBox_TextChanged" FontFamily="Arial" PreviewTextInput="TextBoxNombre_PreviewTextInput" />
         <TextBox x:Name="textBoxContraseña" HorizontalAlignment="Left" Height="22" Margin="214,160,0,0" TextWrapping="Wrap" Text="Contraseña" VerticalAlignment="Top" Width="376" TextChanged="TextBoxContraseña_TextChanged" FontFamily="Arial"/>
         <TextBox x:Name="textBoxEmail" HorizontalAlignment="Left" Height="23" Margin="214,225,0,0" TextWrapping="Wrap" Text="Correo electrónico" VerticalAlignment="Top" Width="376" TextChanged="TextBoxEmail_TextChanged" FontFamily="Arial"/>
         <Button x:Name="buttonRegistrar" Content="Registrarme" HorizontalAlignment="Left" Margin="322,308,0,0" VerticalAlignment="Top" Width="160" Height="50" Click="Button_Click" Background="#FF6600CC" RenderTransformOrigin="1.04,0.703" FontFamily="Yu Gothic UI Semibold" FontSize="22" Foreground="#FFFFFDFD"/>

@@ -1,0 +1,20 @@
+9
+0C:\Users\survi\Desktop\basta\cliente\App.xaml.csutf-8D
+;C:\Users\survi\Desktop\basta\cliente\CodigoRegistro.xaml.csutf-8\
+QC:\Users\survi\Desktop\basta\cliente\Connected Services\ServiceBasta\Reference.csutf-8E
+<C:\Users\survi\Desktop\basta\cliente\CuentaDeUsuario.xaml.csutf-8B
+9C:\Users\survi\Desktop\basta\cliente\InicioSesion.xaml.csutf-8;
+2C:\Users\survi\Desktop\basta\cliente\Lobby.xaml.csutf-8@
+7C:\Users\survi\Desktop\basta\cliente\MainWindow.xaml.csutf-8E
+<C:\Users\survi\Desktop\basta\cliente\NuevaSalaEspera.xaml.csutf-8H
+?C:\Users\survi\Desktop\basta\cliente\Properties\AssemblyInfo.csutf-8P
+EC:\Users\survi\Desktop\basta\cliente\Properties\Resources.Designer.csutf-8O
+DC:\Users\survi\Desktop\basta\cliente\Properties\Settings.Designer.csutf-8M
+BC:\Users\survi\Desktop\basta\cliente\obj\Debug\CodigoRegistro.g.csutf-8N
+CC:\Users\survi\Desktop\basta\cliente\obj\Debug\CuentaDeUsuario.g.csutf-8K
+@C:\Users\survi\Desktop\basta\cliente\obj\Debug\InicioSesion.g.csutf-8D
+9C:\Users\survi\Desktop\basta\cliente\obj\Debug\Lobby.g.csutf-8I
+>C:\Users\survi\Desktop\basta\cliente\obj\Debug\MainWindow.g.csutf-8N
+CC:\Users\survi\Desktop\basta\cliente\obj\Debug\NuevaSalaEspera.g.csutf-8B
+7C:\Users\survi\Desktop\basta\cliente\obj\Debug\App.g.csutf-8_
+TC:\Users\survi\AppData\Local\Temp\.NETFramework,Version=v4.7.2.AssemblyAttributes.csutf-8

@@ -1,24 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.ServiceModel;
+using cliente.ventanasExcepcion;
 
 namespace cliente
 {
-    /// <summary>
-    /// Lógica de interacción para InicioSesion.xaml
-    /// </summary>
-   // [CallbackBehavior(UseSynchronizationContext = false)]
+ 
     public partial class InicioSesion : Window
     {
         public InicioSesion()
@@ -28,19 +15,16 @@ namespace cliente
         
         private void Button_Click(object sender, RoutedEventArgs e)
         {          
-            ServiceBasta.ServiceLoginClient serviceInicioSesion = null;          
+            ServiceBasta.ServiceLoginClient ServiceInicioSesion = null;          
             try
             {
                // InstanceContext instanceContext = new InstanceContext(this);
-                serviceInicioSesion = new ServiceBasta.ServiceLoginClient();
+                ServiceInicioSesion = new ServiceBasta.ServiceLoginClient();
+                string NombreDeUsuario = textBoxNombreDeUsuario.Text;
+                string Contrasena = textBoxContrasena.Text;
+                bool ResultadoInicioSesion = ServiceInicioSesion.InicioSesion(NombreDeUsuario, Contrasena);
 
-                string nombreDeUsuario = textBoxNombreDeUsuario.Text;
-                string contrasena = textBoxContrasena.Text;
-                bool resultadoInicioSesion;
-
-                resultadoInicioSesion= serviceInicioSesion.InicioSesion(nombreDeUsuario, contrasena);
-
-                if (resultadoInicioSesion == true)
+                if (ResultadoInicioSesion == true)
                 {
                     CuentaDeUsuario cuentaDeUsuario = new CuentaDeUsuario();
                     cuentaDeUsuario.Show();
@@ -48,23 +32,25 @@ namespace cliente
                 }
                 else
                 {
-                    MessageBox.Show("Usuario no existe" + resultadoInicioSesion);
-                }
-                
+                    NotificarUsuarioIncorrecto();
+                }              
             }
-            catch (CommunicationException exception)         
+            catch (CommunicationException Excepcion)         
             {
-                serviceInicioSesion.Abort();
-                MessageBox.Show("Ha ocurrido un error de comunicacion con el servidor" + exception);
+                ServiceInicioSesion.Abort();
+                NotificadorDeExcepcion Notificador = new NotificadorDeExcepcion();
+                Notificador.NotificarErrorComunicacion(Excepcion);
+
             }
-            catch(TimeoutException exception)
+            catch(TimeoutException Excepcion)
             {
-                serviceInicioSesion.Abort();
-                MessageBox.Show("Ha ocurrido un error de comunicacion con el servidor "+ exception);
+                ServiceInicioSesion.Abort();
+                NotificadorDeExcepcion Notificador = new NotificadorDeExcepcion();
+                Notificador.NotificarErrorTiempo(Excepcion);
             }
             finally
             {
-                serviceInicioSesion.Close();
+                ServiceInicioSesion.Close();
             }
             
         }
@@ -76,7 +62,13 @@ namespace cliente
             this.Close();
         }
 
-      
+        public void NotificarUsuarioIncorrecto()
+        {
+            String Titulo = "Usuario Incorrecto";
+            String Mensaje = "El usuario es incorrecto. Verifica tu nombre o contraseña";
+            MessageBoxButton Boton = MessageBoxButton.OK;
+            MessageBox.Show(Mensaje, Titulo, Boton);
+        }
     }
-    }
+}
 

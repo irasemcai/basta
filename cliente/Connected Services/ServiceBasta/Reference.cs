@@ -307,6 +307,12 @@ namespace cliente.ServiceBasta {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLogin/RegistrarUsuario", ReplyAction="http://tempuri.org/IServiceLogin/RegistrarUsuarioResponse")]
         System.Threading.Tasks.Task<bool> RegistrarUsuarioAsync(string name, string password, string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLogin/ObtenerUsuariosConectados", ReplyAction="http://tempuri.org/IServiceLogin/ObtenerUsuariosConectadosResponse")]
+        string[] ObtenerUsuariosConectados();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLogin/ObtenerUsuariosConectados", ReplyAction="http://tempuri.org/IServiceLogin/ObtenerUsuariosConectadosResponse")]
+        System.Threading.Tasks.Task<string[]> ObtenerUsuariosConectadosAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -350,6 +356,14 @@ namespace cliente.ServiceBasta {
         
         public System.Threading.Tasks.Task<bool> RegistrarUsuarioAsync(string name, string password, string email) {
             return base.Channel.RegistrarUsuarioAsync(name, password, email);
+        }
+        
+        public string[] ObtenerUsuariosConectados() {
+            return base.Channel.ObtenerUsuariosConectados();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> ObtenerUsuariosConectadosAsync() {
+            return base.Channel.ObtenerUsuariosConectadosAsync();
         }
     }
 }

@@ -92,6 +92,7 @@
       <xsd:import schemaLocation="http://localhost:8081/?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:8081/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:8081/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/juegoBasta.Domain" />
+      <xsd:import schemaLocation="http://localhost:8081/?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IServiceBastaCodigo_VerificarCodigoRegistro_InputMessage">
@@ -130,6 +131,12 @@
   <wsdl:message name="IServiceLogin_RegistrarUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:RegistrarUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceLogin_ObtenerUsuariosConectados_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerUsuariosConectados" />
+  </wsdl:message>
+  <wsdl:message name="IServiceLogin_ObtenerUsuariosConectados_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerUsuariosConectadosResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceBastaCodigo">
     <wsdl:operation name="VerificarCodigoRegistro">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceBastaCodigo/VerificarCodigoRegistro" message="tns:IServiceBastaCodigo_VerificarCodigoRegistro_InputMessage" />
@@ -162,6 +169,10 @@
     <wsdl:operation name="RegistrarUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceLogin/RegistrarUsuario" message="tns:IServiceLogin_RegistrarUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceLogin/RegistrarUsuarioResponse" message="tns:IServiceLogin_RegistrarUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerUsuariosConectados">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceLogin/ObtenerUsuariosConectados" message="tns:IServiceLogin_ObtenerUsuariosConectados_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceLogin/ObtenerUsuariosConectadosResponse" message="tns:IServiceLogin_ObtenerUsuariosConectados_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IServiceBastaCodigo" type="tns:IServiceBastaCodigo">
@@ -228,6 +239,15 @@
     </wsdl:operation>
     <wsdl:operation name="RegistrarUsuario">
       <soap12:operation soapAction="http://tempuri.org/IServiceLogin/RegistrarUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerUsuariosConectados">
+      <soap12:operation soapAction="http://tempuri.org/IServiceLogin/ObtenerUsuariosConectados" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

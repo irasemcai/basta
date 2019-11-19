@@ -1,57 +1,47 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace juegoBasta.Domain
 {
    public class MensajeCorreo
     {
        
-        public bool EnviarCorreo(string correoDestinatario, int codigo)
+        public bool enviarCorreo(string CorreoUsuario, int Codigo)
         {
-            MailAddress CorreoBasta = new MailAddress("bastajuego@gmail.com");
-            MailAddress CorreoDestino = new MailAddress(correoDestinatario);
+            MailAddress CorreoJuegoBasta = new MailAddress("bastajuego@gmail.com");
+            MailAddress CorreoDestino = new MailAddress(CorreoUsuario);
            
 
-            MailMessage mailMessage = new MailMessage();
+            MailMessage MensajeCorreo = new MailMessage();
             
 
-            mailMessage.From = CorreoBasta;
-            mailMessage.To.Add(CorreoDestino);
-            mailMessage.Subject = "Completa tu registro en BastaGame" + DateTime.Now.ToString("dd / MMM / yyy hh:mm:ss ");
-            mailMessage.Body = "El código de registro es: "+ codigo;
-            mailMessage.Priority = MailPriority.Normal;
+            MensajeCorreo.From = CorreoJuegoBasta;
+            MensajeCorreo.To.Add(CorreoDestino);
+            MensajeCorreo.Subject = "Completa tu registro en BastaGame " + DateTime.Now.ToString("dd / MMM / yyy hh:mm:ss ");
+            MensajeCorreo.Body = "Tu código de registro es: "+ Codigo;
+            MensajeCorreo.Priority = MailPriority.Normal;
 
-            //clase protocolo para correo
-            SmtpClient stmp = new SmtpClient();
-            stmp.Host = "smtp.gmail.com";
-            stmp.Port = 587;
-            stmp.Credentials = new NetworkCredential("bastajuego@gmail.com", "reginayelsa2019");
-            stmp.EnableSsl = true;
+            
+            SmtpClient ProtocoloSMTP = new SmtpClient(); //clase protocolo para correo
+            ProtocoloSMTP.Host = "smtp.gmail.com";
+            ProtocoloSMTP.Port = 587;
+            ProtocoloSMTP.Credentials = new NetworkCredential("bastajuego@gmail.com", "reginayelsa2019");
+            ProtocoloSMTP.EnableSsl = true;
             
 
             try
             {
-                stmp.Send(mailMessage);
-                mailMessage.Dispose();
-               
-                
+                ProtocoloSMTP.Send(MensajeCorreo);
+                MensajeCorreo.Dispose();
+                            
                 return true;
             }catch (Exception excepcion)
             {
-               string resultado = "error: " + excepcion.Message;
+               string Resultado = "error: " + excepcion.Message;
                 return false;
             }
             
         }
-
-        /**
-         * 
-        */
-
     }
 }

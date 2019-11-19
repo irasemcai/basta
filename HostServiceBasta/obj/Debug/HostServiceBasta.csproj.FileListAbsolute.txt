@@ -2,7 +2,6 @@ C:\Users\survi\Desktop\basta\HostServiceBasta\bin\Debug\HostServiceBasta.exe.con
 C:\Users\survi\Desktop\basta\HostServiceBasta\bin\Debug\HostServiceBasta.exe
 C:\Users\survi\Desktop\basta\HostServiceBasta\bin\Debug\HostServiceBasta.pdb
 C:\Users\survi\Desktop\basta\HostServiceBasta\obj\Debug\HostServiceBasta.csprojAssemblyReference.cache
-C:\Users\survi\Desktop\basta\HostServiceBasta\obj\Debug\HostServiceBasta.csproj.CoreCompileInputs.cache
 C:\Users\survi\Desktop\basta\HostServiceBasta\obj\Debug\HostServiceBasta.exe
 C:\Users\survi\Desktop\basta\HostServiceBasta\obj\Debug\HostServiceBasta.pdb
 C:\Users\survi\Desktop\basta\HostServiceBasta\bin\Debug\juegoBasta.dll

@@ -1,32 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.ServiceModel;
-using System.Threading;
-using Aspose.Cells.Drawing;
-
+using System.Text.RegularExpressions;
+using cliente.ventanasExcepcion;
 
 namespace cliente
 {
-    /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
-    /// </summary>
     [CallbackBehavior(UseSynchronizationContext = false)]
 
     public partial class MainWindow : Window
     {
-
+      
         public MainWindow()
         {
             InitializeComponent();
@@ -34,92 +20,75 @@ namespace cliente
        
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ServiceBasta.ServiceLoginClient serviceBasta = null;
-
+            ServiceBasta.ServiceLoginClient ServiceLogin = null;
             try
             {
-                //InstanceContext context = new InstanceContext(this);
-                serviceBasta = new ServiceBasta.ServiceLoginClient();
-
-                string nombre = this.textBoxNombre.Text;
-                string contrasena = this.textBoxContraseña.Text;
-                string email = this.textBoxEmail.Text;
-
-                bool resultadoRegistro= serviceBasta.RegistrarUsuario(nombre, contrasena, email);
-                if (resultadoRegistro == true)
+                ServiceLogin = new ServiceBasta.ServiceLoginClient();
+                string Nombre = this.textBoxNombre.Text;
+                string Contrasena = this.textBoxContraseña.Text;
+                string CorreoElectronico = this.textBoxEmail.Text;
+                bool ResultadoRegistro= ServiceLogin.RegistrarUsuario(Nombre, Contrasena, CorreoElectronico); //probar que devuelva el nombre del usuario !null
+                if (ResultadoRegistro == true)
                 {
-                    CodigoRegistro ventanaCodigoRegistro = new CodigoRegistro();
-                    ventanaCodigoRegistro.Show();
-                    this.Close();
-                    /*
-               CuentaDeUsuario ventanaCuentaDeUsuario = new CuentaDeUsuario();
-               ventanaCuentaDeUsuario.Show();*/
+                    CodigoRegistro VentanaCodigoRegistro = new CodigoRegistro();
+                    VentanaCodigoRegistro.Show();
+                    this.Close();                   
                 }
                 else
                 {
-                    NotificarUsuarioAgregado();
+                    NotificarUsuarioNoAgregado();
                 }
             }
-            catch (CommunicationException exception)
+            catch (CommunicationException Exception)
             {
-                serviceBasta.Abort();
-                String mensaje = "Error de conexión con el servidor: " + exception.Message;
-                String titulo = "registro de usuario";
-                MessageBoxButton boton = MessageBoxButton.OK;
-                MessageBox.Show(mensaje, titulo, boton);
+                ServiceLogin.Abort();
+                NotificadorDeExcepcion Notificador = new NotificadorDeExcepcion();
+                Notificador.NotificarErrorComunicacion(Exception);
             }
-            catch (TimeoutException exception)
+            catch (TimeoutException Exception)
             {
-                serviceBasta.Abort();
-                String mensaje = "Tiempo Excedido: "+ exception.Message;
-                String titulo = "registro de usuario";
-                MessageBoxButton boton = MessageBoxButton.OK;
-                MessageBox.Show(mensaje, titulo, boton);
+                ServiceLogin.Abort();
+                NotificadorDeExcepcion Notificador = new NotificadorDeExcepcion();
+                Notificador.NotificarErrorTiempo(Exception);
             }
             finally
-            {
-                if(serviceBasta != null)
-                {
-                    if(serviceBasta.State == CommunicationState.Faulted)                 
-                    serviceBasta.Abort();
-                }
-                else
-                {
-                    serviceBasta.Close();
-                }
+            {               
+                    ServiceLogin.Close();              
             }         
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
+        {                      
+        }      
 
 
         private void TextBoxContraseña_TextChanged(object sender, TextChangedEventArgs e)
         {
-
         }
 
         private void TextBoxEmail_TextChanged(object sender, TextChangedEventArgs e)
         {
-
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            InicioSesion ventanaInicioSesion = new InicioSesion();
-            ventanaInicioSesion.Show();
+            InicioSesion VentanaInicioSesion = new InicioSesion();
+            VentanaInicioSesion.Show();
             this.Close();
-
         }
 
-        public void NotificarUsuarioAgregado()
+        public void NotificarUsuarioNoAgregado()
         {
-            String mensaje = "Falló el registro, porfavor intenta más tarde";
-            String titulo = "¡ups!";
+            String Titulo = "Registro Fallido";
+            String Mensaje = "Lo sentimos, no te pudimos registrar. Corregiremos lo más pronto posible. Porfavor intenta más tarde";
             MessageBoxButton boton = MessageBoxButton.OK;
-            MessageBox.Show(mensaje, titulo, boton);
+            MessageBox.Show(Mensaje, Titulo, boton);
+        }
+
+        private void TextBoxNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {          
+            Regex regex = new Regex(@"^[a-zA-Z]+$");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System.Collections.ObjectModel;
+using System.ServiceModel;
 
 namespace juegoBasta
 {
@@ -6,10 +7,13 @@ namespace juegoBasta
     interface IServiceLogin
     {
         [OperationContract]
-        bool InicioSesion(string nombre, string contrasena);
+        bool iniciarSesion(string Nombre, string Contrasena);
 
         [OperationContract]
-        bool RegistrarUsuario(string name, string password, string email);
+        bool registrarUsuario(string Nombre, string Contrasena, string CorreoElectronico);
+
+        [OperationContract]
+        ObservableCollection<string> obtenerUsuariosConectados();
 
     }
 

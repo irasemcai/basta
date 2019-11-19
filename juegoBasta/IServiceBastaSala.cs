@@ -7,13 +7,13 @@ namespace juegoBasta
     interface IServiceBastaSala
     {
         [OperationContract(IsOneWay = true)]
-        void CrearSalaEspera(int id, int limiteParticipantes, string anfitrion);
+        void crearSalaEspera(int id, int limiteParticipantes, string anfitrion);
 
         [OperationContract(IsOneWay = true)]
-        void UnirseASala(string nombreUsuario);
+        void unirseASala(string nombreUsuario);
 
         [OperationContract]
-        Usuario BuscarUsuarioPorNombre(string nombre);
+        Usuario buscarUsuarioPorNombre(string nombre);
 
 
     }
