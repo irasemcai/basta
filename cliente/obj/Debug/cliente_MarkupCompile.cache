@@ -12,9 +12,13 @@ DEBUG;TRACE
 C:\Users\survi\Desktop\basta\cliente\App.xaml
 599598304
 
+<<<<<<< HEAD
 131922527669
+=======
+131411007860
+>>>>>>> Chat-1
 16-126387099
 CodigoRegistro.xaml;CuentaDeUsuario.xaml;InicioSesion.xaml;MainWindow.xaml;NuevaSalaEspera.xaml;
 
-False
+True
 
