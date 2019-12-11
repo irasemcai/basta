@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="CuentaDeUsuario" Height="450" Width="800">
     <Grid Background="#FF1A1D40">
-        <Button Content="Cerrar sesión" HorizontalAlignment="Left" Margin="625,31,0,0" VerticalAlignment="Top" Width="127" Height="46" Click="Button_Click"/>
-        <Button Content="Iniciar sala de espera" HorizontalAlignment="Left" Margin="580,130,0,0" VerticalAlignment="Top" Width="172" Height="52" Click="Button_Click_1"/>
-        <Button Content="Unirme a sala disponible" HorizontalAlignment="Left" Margin="607,212,0,0" VerticalAlignment="Top" Width="145" Height="48" Click="Button_Click_2"/>
+        <Button x:Name="buttonCerrarSesion" Content="Cerrar sesión" HorizontalAlignment="Left" Margin="625,31,0,0" VerticalAlignment="Top" Width="127" Height="46" Click="Button_Click"/>
+        <Button x:Name="buttonCrearSala" Content="Iniciar sala de espera" HorizontalAlignment="Left" Margin="580,130,0,0" VerticalAlignment="Top" Width="172" Height="52" Click="Button_Click_1"/>
+        <TextBlock x:Name="textBlockUserName" HorizontalAlignment="Left" Margin="70,45,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="35" Width="80" Foreground="White"/>
 
     </Grid>
 </Window>

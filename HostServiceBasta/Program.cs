@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Sockets;
 using System.ServiceModel;
 
 namespace HostServiceBasta
@@ -10,11 +11,19 @@ namespace HostServiceBasta
         {
             using (ServiceHost host = new ServiceHost(typeof(juegoBasta.ServiceBasta)))
             {
-
-                host.Open();
-                Console.WriteLine("Server is running");
-                Console.ReadLine();
+                try
+                {
+                    host.Open();
+                    Console.WriteLine("ServerBasta is running");
+                    Console.ReadLine();
+                }
+                catch (SocketException)
+                {
+                    Console.WriteLine("ServerBasta error");
+                }
             }
+
+
         }
     }
 }

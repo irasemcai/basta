@@ -15,64 +15,15 @@ namespace cliente.ServiceBasta {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ClaseAbstractaOfuserZHjCzTOi", Namespace="http://schemas.datacontract.org/2004/07/juegoBasta.Domain")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ClienteUsuario", Namespace="http://schemas.datacontract.org/2004/07/juegoBasta.Domain")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(cliente.ServiceBasta.Usuario))]
-    public partial class ClaseAbstractaOfuserZHjCzTOi : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Usuario", Namespace="http://schemas.datacontract.org/2004/07/juegoBasta.Domain")]
-    [System.SerializableAttribute()]
-    public partial class Usuario : cliente.ServiceBasta.ClaseAbstractaOfuserZHjCzTOi {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SalaDeEspera", Namespace="http://schemas.datacontract.org/2004/07/juegoBasta.Domain")]
-    [System.SerializableAttribute()]
-    public partial class SalaDeEspera : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class ClienteUsuario : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private cliente.ServiceBasta.Usuario AnfitrionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string EstadoField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdSalaField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private cliente.ServiceBasta.Usuario[] JugadoresEnEsperaField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int LimiteJugadoresField;
+        private string nombreField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -85,66 +36,14 @@ namespace cliente.ServiceBasta {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public cliente.ServiceBasta.Usuario Anfitrion {
+        public string nombre {
             get {
-                return this.AnfitrionField;
+                return this.nombreField;
             }
             set {
-                if ((object.ReferenceEquals(this.AnfitrionField, value) != true)) {
-                    this.AnfitrionField = value;
-                    this.RaisePropertyChanged("Anfitrion");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Estado {
-            get {
-                return this.EstadoField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.EstadoField, value) != true)) {
-                    this.EstadoField = value;
-                    this.RaisePropertyChanged("Estado");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdSala {
-            get {
-                return this.IdSalaField;
-            }
-            set {
-                if ((this.IdSalaField.Equals(value) != true)) {
-                    this.IdSalaField = value;
-                    this.RaisePropertyChanged("IdSala");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public cliente.ServiceBasta.Usuario[] JugadoresEnEspera {
-            get {
-                return this.JugadoresEnEsperaField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.JugadoresEnEsperaField, value) != true)) {
-                    this.JugadoresEnEsperaField = value;
-                    this.RaisePropertyChanged("JugadoresEnEspera");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int LimiteJugadores {
-            get {
-                return this.LimiteJugadoresField;
-            }
-            set {
-                if ((this.LimiteJugadoresField.Equals(value) != true)) {
-                    this.LimiteJugadoresField = value;
-                    this.RaisePropertyChanged("LimiteJugadores");
+                if ((object.ReferenceEquals(this.nombreField, value) != true)) {
+                    this.nombreField = value;
+                    this.RaisePropertyChanged("nombre");
                 }
             }
         }
@@ -163,11 +62,11 @@ namespace cliente.ServiceBasta {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceBasta.IServiceBastaCodigo")]
     public interface IServiceBastaCodigo {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBastaCodigo/VerificarCodigoRegistro", ReplyAction="http://tempuri.org/IServiceBastaCodigo/VerificarCodigoRegistroResponse")]
-        bool VerificarCodigoRegistro(int codigo);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBastaCodigo/verificarCodigoRegistro", ReplyAction="http://tempuri.org/IServiceBastaCodigo/verificarCodigoRegistroResponse")]
+        cliente.ServiceBasta.ClienteUsuario verificarCodigoRegistro(int Codigo);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBastaCodigo/VerificarCodigoRegistro", ReplyAction="http://tempuri.org/IServiceBastaCodigo/VerificarCodigoRegistroResponse")]
-        System.Threading.Tasks.Task<bool> VerificarCodigoRegistroAsync(int codigo);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBastaCodigo/verificarCodigoRegistro", ReplyAction="http://tempuri.org/IServiceBastaCodigo/verificarCodigoRegistroResponse")]
+        System.Threading.Tasks.Task<cliente.ServiceBasta.ClienteUsuario> verificarCodigoRegistroAsync(int Codigo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -197,46 +96,98 @@ namespace cliente.ServiceBasta {
                 base(binding, remoteAddress) {
         }
         
-        public bool VerificarCodigoRegistro(int codigo) {
-            return base.Channel.VerificarCodigoRegistro(codigo);
+        public cliente.ServiceBasta.ClienteUsuario verificarCodigoRegistro(int Codigo) {
+            return base.Channel.verificarCodigoRegistro(Codigo);
         }
         
-        public System.Threading.Tasks.Task<bool> VerificarCodigoRegistroAsync(int codigo) {
-            return base.Channel.VerificarCodigoRegistroAsync(codigo);
+        public System.Threading.Tasks.Task<cliente.ServiceBasta.ClienteUsuario> verificarCodigoRegistroAsync(int Codigo) {
+            return base.Channel.verificarCodigoRegistroAsync(Codigo);
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceBasta.IServiceBastaSala", CallbackContract=typeof(cliente.ServiceBasta.IServiceBastaSalaCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceBasta.IServiceLogin")]
+    public interface IServiceLogin {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLogin/iniciarSesion", ReplyAction="http://tempuri.org/IServiceLogin/iniciarSesionResponse")]
+        bool iniciarSesion(string Nombre, string Contrasena);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLogin/iniciarSesion", ReplyAction="http://tempuri.org/IServiceLogin/iniciarSesionResponse")]
+        System.Threading.Tasks.Task<bool> iniciarSesionAsync(string Nombre, string Contrasena);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLogin/registrarUsuario", ReplyAction="http://tempuri.org/IServiceLogin/registrarUsuarioResponse")]
+        bool registrarUsuario(string Nombre, string Contrasena, string CorreoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLogin/registrarUsuario", ReplyAction="http://tempuri.org/IServiceLogin/registrarUsuarioResponse")]
+        System.Threading.Tasks.Task<bool> registrarUsuarioAsync(string Nombre, string Contrasena, string CorreoElectronico);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IServiceLoginChannel : cliente.ServiceBasta.IServiceLogin, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ServiceLoginClient : System.ServiceModel.ClientBase<cliente.ServiceBasta.IServiceLogin>, cliente.ServiceBasta.IServiceLogin {
+        
+        public ServiceLoginClient() {
+        }
+        
+        public ServiceLoginClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public ServiceLoginClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public ServiceLoginClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public ServiceLoginClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public bool iniciarSesion(string Nombre, string Contrasena) {
+            return base.Channel.iniciarSesion(Nombre, Contrasena);
+        }
+        
+        public System.Threading.Tasks.Task<bool> iniciarSesionAsync(string Nombre, string Contrasena) {
+            return base.Channel.iniciarSesionAsync(Nombre, Contrasena);
+        }
+        
+        public bool registrarUsuario(string Nombre, string Contrasena, string CorreoElectronico) {
+            return base.Channel.registrarUsuario(Nombre, Contrasena, CorreoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task<bool> registrarUsuarioAsync(string Nombre, string Contrasena, string CorreoElectronico) {
+            return base.Channel.registrarUsuarioAsync(Nombre, Contrasena, CorreoElectronico);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceBasta.IServiceBastaSala", CallbackContract=typeof(cliente.ServiceBasta.IServiceBastaSalaCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IServiceBastaSala {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBastaSala/CrearSalaEspera")]
-        void CrearSalaEspera(int id, int limiteParticipantes, string anfitrion);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBastaSala/crearSalaEspera")]
+        void crearSalaEspera(int id, int limiteParticipantes, string anfitrion);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBastaSala/CrearSalaEspera")]
-        System.Threading.Tasks.Task CrearSalaEsperaAsync(int id, int limiteParticipantes, string anfitrion);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBastaSala/crearSalaEspera")]
+        System.Threading.Tasks.Task crearSalaEsperaAsync(int id, int limiteParticipantes, string anfitrion);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBastaSala/UnirseASala")]
-        void UnirseASala(string nombreUsuario);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBastaSala/unirseASala")]
+        void unirseASala(cliente.ServiceBasta.ClienteUsuario cliente);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBastaSala/UnirseASala")]
-        System.Threading.Tasks.Task UnirseASalaAsync(string nombreUsuario);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBastaSala/BuscarUsuarioPorNombre", ReplyAction="http://tempuri.org/IServiceBastaSala/BuscarUsuarioPorNombreResponse")]
-        cliente.ServiceBasta.Usuario BuscarUsuarioPorNombre(string nombre);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBastaSala/BuscarUsuarioPorNombre", ReplyAction="http://tempuri.org/IServiceBastaSala/BuscarUsuarioPorNombreResponse")]
-        System.Threading.Tasks.Task<cliente.ServiceBasta.Usuario> BuscarUsuarioPorNombreAsync(string nombre);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBastaSala/unirseASala")]
+        System.Threading.Tasks.Task unirseASalaAsync(cliente.ServiceBasta.ClienteUsuario cliente);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IServiceBastaSalaCallback {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBastaSala/NotificarUsuarioEnSalaEspera")]
-        void NotificarUsuarioEnSalaEspera(cliente.ServiceBasta.SalaDeEspera salaDeEspera);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBastaSala/ImprimirUsuarioAgregadoSala")]
-        void ImprimirUsuarioAgregadoSala(string nombreUsuario);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBastaSala/ActualizarClientes")]
+        void ActualizarClientes(cliente.ServiceBasta.ClienteUsuario[] clientes);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -267,103 +218,20 @@ namespace cliente.ServiceBasta {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void CrearSalaEspera(int id, int limiteParticipantes, string anfitrion) {
-            base.Channel.CrearSalaEspera(id, limiteParticipantes, anfitrion);
+        public void crearSalaEspera(int id, int limiteParticipantes, string anfitrion) {
+            base.Channel.crearSalaEspera(id, limiteParticipantes, anfitrion);
         }
         
-        public System.Threading.Tasks.Task CrearSalaEsperaAsync(int id, int limiteParticipantes, string anfitrion) {
-            return base.Channel.CrearSalaEsperaAsync(id, limiteParticipantes, anfitrion);
+        public System.Threading.Tasks.Task crearSalaEsperaAsync(int id, int limiteParticipantes, string anfitrion) {
+            return base.Channel.crearSalaEsperaAsync(id, limiteParticipantes, anfitrion);
         }
         
-        public void UnirseASala(string nombreUsuario) {
-            base.Channel.UnirseASala(nombreUsuario);
+        public void unirseASala(cliente.ServiceBasta.ClienteUsuario cliente) {
+            base.Channel.unirseASala(cliente);
         }
         
-        public System.Threading.Tasks.Task UnirseASalaAsync(string nombreUsuario) {
-            return base.Channel.UnirseASalaAsync(nombreUsuario);
-        }
-        
-        public cliente.ServiceBasta.Usuario BuscarUsuarioPorNombre(string nombre) {
-            return base.Channel.BuscarUsuarioPorNombre(nombre);
-        }
-        
-        public System.Threading.Tasks.Task<cliente.ServiceBasta.Usuario> BuscarUsuarioPorNombreAsync(string nombre) {
-            return base.Channel.BuscarUsuarioPorNombreAsync(nombre);
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceBasta.IServiceLogin")]
-    public interface IServiceLogin {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLogin/InicioSesion", ReplyAction="http://tempuri.org/IServiceLogin/InicioSesionResponse")]
-        bool InicioSesion(string nombre, string contrasena);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLogin/InicioSesion", ReplyAction="http://tempuri.org/IServiceLogin/InicioSesionResponse")]
-        System.Threading.Tasks.Task<bool> InicioSesionAsync(string nombre, string contrasena);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLogin/RegistrarUsuario", ReplyAction="http://tempuri.org/IServiceLogin/RegistrarUsuarioResponse")]
-        bool RegistrarUsuario(string name, string password, string email);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLogin/RegistrarUsuario", ReplyAction="http://tempuri.org/IServiceLogin/RegistrarUsuarioResponse")]
-        System.Threading.Tasks.Task<bool> RegistrarUsuarioAsync(string name, string password, string email);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLogin/ObtenerUsuariosConectados", ReplyAction="http://tempuri.org/IServiceLogin/ObtenerUsuariosConectadosResponse")]
-        string[] ObtenerUsuariosConectados();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLogin/ObtenerUsuariosConectados", ReplyAction="http://tempuri.org/IServiceLogin/ObtenerUsuariosConectadosResponse")]
-        System.Threading.Tasks.Task<string[]> ObtenerUsuariosConectadosAsync();
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceLoginChannel : cliente.ServiceBasta.IServiceLogin, System.ServiceModel.IClientChannel {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceLoginClient : System.ServiceModel.ClientBase<cliente.ServiceBasta.IServiceLogin>, cliente.ServiceBasta.IServiceLogin {
-        
-        public ServiceLoginClient() {
-        }
-        
-        public ServiceLoginClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
-        }
-        
-        public ServiceLoginClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
-        }
-        
-        public ServiceLoginClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
-        }
-        
-        public ServiceLoginClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
-        }
-        
-        public bool InicioSesion(string nombre, string contrasena) {
-            return base.Channel.InicioSesion(nombre, contrasena);
-        }
-        
-        public System.Threading.Tasks.Task<bool> InicioSesionAsync(string nombre, string contrasena) {
-            return base.Channel.InicioSesionAsync(nombre, contrasena);
-        }
-        
-        public bool RegistrarUsuario(string name, string password, string email) {
-            return base.Channel.RegistrarUsuario(name, password, email);
-        }
-        
-        public System.Threading.Tasks.Task<bool> RegistrarUsuarioAsync(string name, string password, string email) {
-            return base.Channel.RegistrarUsuarioAsync(name, password, email);
-        }
-        
-        public string[] ObtenerUsuariosConectados() {
-            return base.Channel.ObtenerUsuariosConectados();
-        }
-        
-        public System.Threading.Tasks.Task<string[]> ObtenerUsuariosConectadosAsync() {
-            return base.Channel.ObtenerUsuariosConectadosAsync();
+        public System.Threading.Tasks.Task unirseASalaAsync(cliente.ServiceBasta.ClienteUsuario cliente) {
+            return base.Channel.unirseASalaAsync(cliente);
         }
     }
 }

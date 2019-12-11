@@ -8,63 +8,31 @@ using System.Threading.Tasks;
 
 namespace juegoBasta.Domain
 {
-    [DataContract]
+    [DataContract] //con el data contract hacer operaciones crud desde el server, no mas controlador. 
     public class SalaDeEspera
     {
-        protected int idSala;
-        protected string estado;
-        public List<Usuario> jugadoresEnEspera;
-        protected int limiteJugadores;
-        protected Usuario anfitrion;
-       public SalaDeEspera(int id, string estado, List<Usuario> usuarios, int limiteJugadores, Usuario anfitrion)
-        {
-            this.IdSala = id;
-            this.estado = estado;
-            this.JugadoresEnEspera = usuarios;
-            this.limiteJugadores = limiteJugadores;
-            this.anfitrion = anfitrion;
-        }
-       
-       
         [DataMember]
-        public int IdSala
-        {
-            get { return idSala; }
-            set { idSala = value; }
-        }
-        
-        [DataMember]
-        protected string Estado {
-            get { return estado; }
-            set { estado = value; }
-        }
-        [DataMember]
-        public List<Usuario> JugadoresEnEspera {
-            get { return jugadoresEnEspera; }
-            set { jugadoresEnEspera = value; }
-        }
-        [DataMember]
-        private int LimiteJugadores {
-            get { return limiteJugadores; }
-            set { limiteJugadores = value; }
-        }
-        [DataMember]
-        private Usuario Anfitrion {
-            get { return anfitrion; }
-            set { anfitrion = value; }
-        }
-    }
-    //private Dictionary<Usuario, string> usuarios;
+        public int salaId { get; set; }
 
+        [DataMember]
+        public ObservableCollection<Usuario> ListaUsuariosEnSala { get; set; }
+       
+        public SalaDeEspera()
+        {
+        }
+
+    }
+}
+    //private Dictionary<Usuario, string> usuarios;
+/*
     public class ControladorSala {
 
         public SalaDeEspera CrearSalaDeEspera(int id, int limiteJugadores, Usuario anfitrion)
         {
             string estado = "disponible";
-            id = 1;
             List<Usuario> usuarios = new List<Usuario>(limiteJugadores);
             SalaDeEspera salaDeEspera = new SalaDeEspera (id, estado, usuarios, limiteJugadores, anfitrion);
-            salaDeEspera.JugadoresEnEspera.Add(anfitrion);
+           // salaDeEspera.JugadoresEnEspera.Add(anfitrion);
 
             return salaDeEspera; 
 
@@ -82,9 +50,9 @@ namespace juegoBasta.Domain
             else
             {
                 return null;
-            } */
+            } 
             return null;
-        }
+        
 
         /*
         public bool agregarUsuarioASala(String usuario)
@@ -112,9 +80,9 @@ namespace juegoBasta.Domain
             {
                 return false;
             }
-        } */
+        } 
     }
-}
+}*/
 
     
         

@@ -1,4 +1,6 @@
-﻿using cliente.ventanasExcepcion;
+﻿using cliente.ServiceBasta;
+using cliente.validacion;
+using cliente.ventanasExcepcion;
 using System;
 using System.ServiceModel;
 using System.Windows;
@@ -8,7 +10,7 @@ namespace cliente
 {
     public partial class CodigoRegistro : Window
     {
-        public CodigoRegistro()
+        public CodigoRegistro(ClienteUsuario clienteUsuario)
         {
             InitializeComponent();
         }
@@ -22,11 +24,12 @@ namespace cliente
                 int codigoInt = int.Parse(Codigotxt);
 
                 ServiceBastaCodigoClient = new ServiceBasta.ServiceBastaCodigoClient();
-                bool ResultadoCodigo = ServiceBastaCodigoClient.VerificarCodigoRegistro(codigoInt);
+                ClienteUsuario clienteUsuario = new ClienteUsuario();
+                clienteUsuario = ServiceBastaCodigoClient.verificarCodigoRegistro(codigoInt);
 
-                if (ResultadoCodigo == true)
+                if (clienteUsuario != null)
                 {
-                    CuentaDeUsuario cuentaDeUsuario = new CuentaDeUsuario();
+                    CuentaDeUsuario cuentaDeUsuario = new CuentaDeUsuario(clienteUsuario);
                     cuentaDeUsuario.Show();
                     this.Close();
                 }
@@ -61,6 +64,17 @@ namespace cliente
             String Mensaje = "El código es incorrecto. Inténtalo de nuevo.";
             MessageBoxButton Boton = MessageBoxButton.OK;
             MessageBox.Show(Mensaje, Titulo, Boton);
+        }
+
+        private void TextBoxCodigo_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            Validador Validacion = new Validador();
+            bool EntradaValidada = Validacion.validarSoloNumeros(e.Text);
+            if(EntradaValidada== false)
+            {
+                e.Handled = true;
+            }
+
         }
     }
 }

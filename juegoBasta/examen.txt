@@ -1,0 +1,24 @@
+https://docs.google.com/document/d/1Neh1ONFCh-ZXePEqbpvjZ6nOErCEz2xT/edit
+
+https://docs.google.com/document/d/1DMVOBS7UWZGEbCheRgMp_q8CaNeDsaKY/edit
+
+
+CU:
+
+empeñar prenda
+registrar refrendo de prenda
+desempeñar prenda
+reempeñar prenda
+
+registrar pago de monto total del préstamo ---> generar/imprimir comprobante de pago
+
+
+poner en venta prenda
+
+generar reportes de pagos atrasados y adelantados del cliente
+generar reportes de montos mensuales
+generar reportes de montos totales de los valores de prendas que se desempeñan
+generar reportes de prendas que pasan a tienda
+
+
+componente de autenticación de usuarios

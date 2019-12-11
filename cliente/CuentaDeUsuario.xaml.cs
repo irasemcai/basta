@@ -1,17 +1,12 @@
-﻿using System;
+﻿using cliente.ServiceBasta;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace cliente
 {
@@ -20,9 +15,12 @@ namespace cliente
     /// </summary>
     public partial class CuentaDeUsuario : Window
     {
-        public CuentaDeUsuario()
+        ServiceBasta.ClienteUsuario ClienteUsuario = null;
+        public CuentaDeUsuario(ClienteUsuario cliente )
         {
             InitializeComponent();
+            textBlockUserName.Text = cliente.nombre;
+            ClienteUsuario = cliente;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -34,21 +32,10 @@ namespace cliente
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            NuevaSalaEspera ventanaNuevaSalaEspera = new NuevaSalaEspera();
+            NuevaSalaEspera ventanaNuevaSalaEspera = new NuevaSalaEspera(ClienteUsuario);
             ventanaNuevaSalaEspera.Show();
             this.Close();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            ServiceBasta.ServiceBastaSalaClient serviceInicioSesion = null;
-
-
-            InstanceContext instanceContext = new InstanceContext(this);
-            serviceInicioSesion = new ServiceBasta.ServiceBastaSalaClient(instanceContext);
-
-
-        }
-            
     }
 }

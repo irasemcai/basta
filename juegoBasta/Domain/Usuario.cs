@@ -1,13 +1,11 @@
 ﻿using System.Linq;
-
+using System.Runtime.Serialization;
 
 namespace juegoBasta.Domain
 {
     public class Usuario : Entidad<user>
     {
         private user User;
-        
-
         public Usuario()
         {
         }
@@ -16,10 +14,10 @@ namespace juegoBasta.Domain
         {
             this.User = user;
         }
-        //agregar metodo obtener NOMBRE
-        public override int agregarEntidad (user Entidad)
+
+        public override int agregarEntidad(user Entidad)
         {
-            
+
             int Resultado;
             Entidades.users.Add(Entidad);
             Resultado = Entidades.SaveChanges();
@@ -45,7 +43,7 @@ namespace juegoBasta.Domain
             bool Resultado = Entidades.users.Any(x => x.name == Nombre);
             if (Resultado)
             {
-              user User= Entidades.users.Find(Nombre);
+                user User = Entidades.users.Find(Nombre);
                 Usuario Usuario = new Usuario(User);
                 return Usuario;
             }
@@ -53,7 +51,14 @@ namespace juegoBasta.Domain
             {
                 return null;
             }
-           
+
         }
+    }
+
+    [DataContract]
+    public class ClienteUsuario
+    {
+        [DataMember]
+        public string nombre { get; set; }
     }
 }

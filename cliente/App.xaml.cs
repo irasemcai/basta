@@ -13,6 +13,10 @@ namespace cliente
     /// </summary>
     public partial class App : Application
     {
-        //System.Threading.Thread.CurrentThread .CurrentUICulture = new System.Globalization.CultureInfo("es-Mx");
+        App()
+        {
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
+        }
+
     }
 }

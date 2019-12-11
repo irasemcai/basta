@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Linq;
 using System.ServiceModel;
 using juegoBasta.Domain;
 
@@ -8,19 +8,23 @@ namespace juegoBasta
 {
     // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de clase "Service1" en el código y en el archivo de configuración a la vez.
     //[ServiceBehavior(ConcurrencyMode= ConcurrencyMode.Reentrant)]
-    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single, InstanceContextMode = InstanceContextMode.Single)]
-    public class ServiceBasta : IServiceBastaCodigo, IServiceLogin , IServiceBastaSala
+    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple, InstanceContextMode = InstanceContextMode.Single)]
+    public class ServiceBasta : IServiceBastaCodigo, IServiceLogin,  IServiceBastaSala
     {
         Type providerService = typeof(System.Data.Entity.SqlServer.SqlProviderServices);
 
-        private Dictionary<string, int> NUEVOSUSUARIOS = new Dictionary<string, int>();
-        ObservableCollection<String> USUARIOSCONECTADOS = new ObservableCollection<string>();
-        
+        private IBastaSalaCallback bastaSalaCallback = null;
 
+        private Dictionary<ClienteUsuario, int> NUEVOSUSUARIOS = new Dictionary<ClienteUsuario, int>();
+        List<String> USUARIOSCONECTADOS = new List<string>();
 
-        public bool registrarUsuario (string Nombre, string Contrasena, string CorreoElectronico)
+        //prueba pra sala
+        Dictionary<string, IBastaSalaCallback> JUGADORESSALA = new Dictionary<string, IBastaSalaCallback>();
+        List<ClienteUsuario> LISTAUSUARIOSENLASALA = new List<ClienteUsuario>();
+
+        public bool registrarUsuario(string Nombre, string Contrasena, string CorreoElectronico)
         {
-           
+
             Usuario Usuario = new Usuario();
             user User = new user();
             MensajeCorreo MensajeCorreo = new MensajeCorreo();
@@ -38,7 +42,9 @@ namespace juegoBasta
                 bool ResultadoEnvioCorreoVerificacion = MensajeCorreo.enviarCorreo(CorreoElectronico, CodigoRegistro);
                 if (ResultadoEnvioCorreoVerificacion == true)
                 {
-                    NUEVOSUSUARIOS.Add(Nombre, CodigoRegistro);
+                    ClienteUsuario cliente = new ClienteUsuario();
+                    cliente.nombre = Nombre;
+                    NUEVOSUSUARIOS.Add(cliente, CodigoRegistro);
 
                 }
                 Console.WriteLine($"{CorreoElectronico} se ha registrado. Resultado registro: {ResultadoRegistro} ,Resultado correo:  {ResultadoEnvioCorreoVerificacion}");
@@ -48,43 +54,8 @@ namespace juegoBasta
             {
                 Console.WriteLine($"{CorreoElectronico} se ha intentó registrarse. Resultado registro: {ResultadoRegistro}");
                 return false;
-            }          
-        }
-
-
-        public Usuario buscarUsuarioPorNombre(string Nombre)
-        {
-            
-            Usuario Usuario = new Usuario();
-            Usuario User;
-            User = Usuario.obtenerUsuarioPorNombre(Nombre);
-           
-            return User;
-        }
-
-        public void crearSalaEspera(int id, int limiteParticipantes, string anfitrion)
-        {
-            
-            IBastaSalaCallback bastaSalaCallbabk = OperationContext.Current.GetCallbackChannel<IBastaSalaCallback>();
-            //SalaDeEspera salaDeEspera = new SalaDeEspera(nombre, limiteParticipantes, anfitrion);
-            // bool resultado= salaDeEspera.agregarUsuarioASala(anfitrion);
-            Usuario usuarioAnfitrion;
-            usuarioAnfitrion = buscarUsuarioPorNombre(anfitrion);
-            ControladorSala controladorSala = new ControladorSala();
-            SalaDeEspera salaDeEspera= controladorSala.CrearSalaDeEspera(id, limiteParticipantes, usuarioAnfitrion);
-            if(salaDeEspera!= null){
-                Console.WriteLine($"{anfitrion} ha creado Sala: {salaDeEspera.ToString()} ");
-                
             }
-            else
-            {
-                Console.WriteLine($"{anfitrion} ha INTENTADO crear una Sala: null {salaDeEspera.ToString()} ");
-             
-            }
-           
-                bastaSalaCallbabk.NotificarUsuarioEnSalaEspera(salaDeEspera);
         }
-
 
         public bool iniciarSesion(string Nombre, string Contrasena)
         {
@@ -92,8 +63,10 @@ namespace juegoBasta
             bool ResultadoInicioSesion = Usuario.iniciarSesion(Nombre, Contrasena);
             if (ResultadoInicioSesion)
             {
-                Console.WriteLine($"{Nombre} se ha conectado");
                 USUARIOSCONECTADOS.Add(Nombre);
+
+                Console.WriteLine($"{Nombre} se ha conectado");
+
                 return true;
             }
             else
@@ -102,38 +75,64 @@ namespace juegoBasta
             }
         }
 
-
-        public void unirseASala(string nombreUsuario)
+        public ClienteUsuario verificarCodigoRegistro(int Codigo, ClienteUsuario cliente)
         {
-            Dictionary<IBastaSalaCallback, string> usuarios = new Dictionary<IBastaSalaCallback, string>();
-            var conexion = OperationContext.Current.GetCallbackChannel<IBastaSalaCallback>();
-          //  SalaDeEspera salaDeEspera = new SalaDeEspera();
-           // bool resultado = salaDeEspera.agregarUsuarioASala(nombreUsuario);
-            usuarios[conexion] = nombreUsuario;
-
-            Console.WriteLine($"{nombreUsuario} se ha unido a sala");
-
-           // conexion.NotificarUsuarioEnSalaEspera(nombreUsuario, resultado);
+            foreach (ClienteUsuario Usuario in NUEVOSUSUARIOS.Keys)
+            {
+                if (NUEVOSUSUARIOS[cliente].Equals(Codigo))
+                {
+                    USUARIOSCONECTADOS.Add(Usuario.nombre);
+                    Console.WriteLine($"{Usuario} ha completado su registro e inició sesión");
+                    return Usuario;
+                }
+            }
+            return null;
         }
 
-        public bool verificarCodigoRegistro(int Codigo)
-        {           
-            foreach (string Usuario in NUEVOSUSUARIOS.Keys)
-                {
-                    if (NUEVOSUSUARIOS[Usuario].Equals(Codigo))
-                    {
-                        USUARIOSCONECTADOS.Add(Usuario);
-                    Console.WriteLine($"{Usuario} ha completado su registro e inició sesión");
-                        return true;
-                    }
-                }
-                return false;
-            }
-
-        public ObservableCollection<string> obtenerUsuariosConectados()
+        public void crearSalaEspera(int id, int limiteParticipantes, string anfitrion)
         {
-            Console.WriteLine($"{USUARIOSCONECTADOS} now");
-            return USUARIOSCONECTADOS;
+            throw new NotImplementedException();
+        }
+
+        public void unirseASala(ClienteUsuario cliente)
+        {
+            bastaSalaCallback = OperationContext.Current.GetCallbackChannel<IBastaSalaCallback>();
+
+            Console.WriteLine(":(");
+            if (bastaSalaCallback != null)
+            {
+                Console.WriteLine(":((");
+                if (JUGADORESSALA.ContainsKey(cliente.nombre))
+                {
+                    Console.WriteLine("usuario ya en lista");
+                    return;
+                }
+                else
+                {
+                    JUGADORESSALA.Add(cliente.nombre, bastaSalaCallback);
+                    LISTAUSUARIOSENLASALA.Add(cliente);
+                    Console.WriteLine(":(((");
+                    try
+                    {
+                        var jugadoresQueNoSonYo = JUGADORESSALA.Where(j => j.Key != cliente.nombre);
+                        foreach (var jugador in jugadoresQueNoSonYo)
+                        {
+                            var callback = jugador.Value;
+                            callback.ActualizarClientes(LISTAUSUARIOSENLASALA);
+                        }
+                        Console.WriteLine(":((((");
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine($"{e.Message}" + $"{e.InnerException}");
+                    }
+
+                }
+
+            }
+            Console.WriteLine(":D");
         }
     }
-}    
+        
+}
+

@@ -12,3 +12,4 @@ C:\Users\survi\Desktop\basta\HostServiceBasta\bin\Debug\EntityFramework.xml
 C:\Users\survi\Desktop\basta\HostServiceBasta\obj\Debug\HostServiceBasta.csproj.CopyComplete
 C:\Users\survi\Desktop\basta\HostServiceBasta\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\survi\Desktop\basta\HostServiceBasta\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\survi\Desktop\basta\HostServiceBasta\obj\Debug\HostServiceBasta.csproj.CoreCompileInputs.cache

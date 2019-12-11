@@ -7,11 +7,18 @@
         mc:Ignorable="d"
         Title="NuevaSalaEspera" Height="450" Width="800">
     <Grid Background="#FF1A1D40">
-        <Button x:Name="ButtonAgregarSala" Content="crear" HorizontalAlignment="Left" Margin="300,286,0,0" VerticalAlignment="Top" Width="223" Height="50" Click="ButtonAgregarSala_Click"/>
+        <Button x:Name="ButtonAgregarSala" Content="Unirme" HorizontalAlignment="Left" Margin="282,320,0,0" VerticalAlignment="Top" Width="223" Height="50" Click="ButtonAgregarSala_Click"/>
         <TextBox x:Name="textboxIdSala" HorizontalAlignment="Left" Height="23" Margin="158,126,0,0" TextWrapping="Wrap" Text="id" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="textboxNumParticipantes" HorizontalAlignment="Left" Height="23" Margin="158,175,0,0" TextWrapping="Wrap" Text="número participantes" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textboxCajaParticipantes" HorizontalAlignment="Left" Height="146" Margin="403,87,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="326"/>
         <TextBox x:Name="textboxNombreUsuario" HorizontalAlignment="Left" Height="23" Margin="158,219,0,0" TextWrapping="Wrap" Text="nombre anfitrión" VerticalAlignment="Top" Width="120"/>
+        <ListBox x:Name="ListBoxUsuariosEnLaSala" HorizontalAlignment="Left" Height="240" Margin="345,20,0,0" VerticalAlignment="Top" Width="415" Foreground="White" ItemsSource="{Binding clientes}">
+            <ListBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="#FF0B5A8F" Offset="1"/>
+                </LinearGradientBrush>
+            </ListBox.Background>
+        </ListBox>
 
     </Grid>
 </Window>

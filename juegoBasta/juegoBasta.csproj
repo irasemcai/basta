@@ -89,9 +89,9 @@
     <Compile Include="gameUser.cs">
       <DependentUpon>dbBasta.tt</DependentUpon>
     </Compile>
-    <Compile Include="IServiceBastaCodigo.cs" />
-    <Compile Include="IServiceBastaSala.cs" />
-    <Compile Include="IServiceLogin.cs" />
+    <Compile Include="Contratos\IServiceBastaCodigo.cs" />
+    <Compile Include="Contratos\IServiceBastaSala.cs" />
+    <Compile Include="Contratos\IServiceLogin.cs" />
     <Compile Include="message.cs">
       <DependentUpon>dbBasta.tt</DependentUpon>
     </Compile>
@@ -139,9 +139,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <VSToolsPath Condition="'$(VSToolsPath)' == '' and '$(VisualStudioVersion)' != '' and '$(VisualStudioVersion)' != '11.0'">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

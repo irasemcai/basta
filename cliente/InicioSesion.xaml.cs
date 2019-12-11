@@ -2,6 +2,8 @@
 using System.Windows;
 using System.ServiceModel;
 using cliente.ventanasExcepcion;
+using cliente.validacion;
+using cliente.ServiceBasta;
 
 namespace cliente
 {
@@ -21,12 +23,15 @@ namespace cliente
                // InstanceContext instanceContext = new InstanceContext(this);
                 ServiceInicioSesion = new ServiceBasta.ServiceLoginClient();
                 string NombreDeUsuario = textBoxNombreDeUsuario.Text;
-                string Contrasena = textBoxContrasena.Text;
-                bool ResultadoInicioSesion = ServiceInicioSesion.InicioSesion(NombreDeUsuario, Contrasena);
+                string Contrasena = textBoxContrasena.Password;
+                bool ResultadoInicioSesion = ServiceInicioSesion.iniciarSesion(NombreDeUsuario, Contrasena);
 
                 if (ResultadoInicioSesion == true)
                 {
-                    CuentaDeUsuario cuentaDeUsuario = new CuentaDeUsuario();
+                    ClienteUsuario clienteUsuario = new ClienteUsuario();
+                    clienteUsuario.nombre = NombreDeUsuario;
+
+                    CuentaDeUsuario cuentaDeUsuario = new CuentaDeUsuario(clienteUsuario);
                     cuentaDeUsuario.Show();
                     this.Close();
                 }
@@ -68,6 +73,36 @@ namespace cliente
             String Mensaje = "El usuario es incorrecto. Verifica tu nombre o contraseña";
             MessageBoxButton Boton = MessageBoxButton.OK;
             MessageBox.Show(Mensaje, Titulo, Boton);
+        }
+
+        private void TextBoxNombreDeUsuario_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            Validador Validacion = new Validador();
+            bool resultadoValidacion = Validacion.validarLetrasYNumeros(e.Text);
+            if (resultadoValidacion == false)
+            {
+                e.Handled = true;
+            }   
+        }
+
+        private void TextBoxContrasena_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            Validador Validacion = new Validador();
+            bool resultadoValidacion = Validacion.validarLetrasYNumeros(e.Text);
+            if (resultadoValidacion == false)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TextBoxNombreDeUsuario_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBoxContrasena_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
         }
     }
 }

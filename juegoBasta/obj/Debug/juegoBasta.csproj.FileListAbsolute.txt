@@ -9,3 +9,4 @@ C:\Users\survi\Desktop\basta\juegoBasta\obj\Debug\juegoBasta.csprojAssemblyRefer
 C:\Users\survi\Desktop\basta\juegoBasta\obj\Debug\juegoBasta.csproj.CopyComplete
 C:\Users\survi\Desktop\basta\juegoBasta\obj\Debug\juegoBasta.dll
 C:\Users\survi\Desktop\basta\juegoBasta\obj\Debug\juegoBasta.pdb
+C:\Users\survi\Desktop\basta\juegoBasta\obj\Debug\juegoBasta.csproj.CoreCompileInputs.cache

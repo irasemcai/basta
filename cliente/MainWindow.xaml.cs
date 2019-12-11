@@ -5,6 +5,8 @@ using System.Windows.Input;
 using System.ServiceModel;
 using System.Text.RegularExpressions;
 using cliente.ventanasExcepcion;
+using cliente.validacion;
+using cliente.ServiceBasta;
 
 namespace cliente
 {
@@ -25,12 +27,26 @@ namespace cliente
             {
                 ServiceLogin = new ServiceBasta.ServiceLoginClient();
                 string Nombre = this.textBoxNombre.Text;
-                string Contrasena = this.textBoxContraseña.Text;
+                string Contrasena = this.textBoxContrasena.Password;
                 string CorreoElectronico = this.textBoxEmail.Text;
-                bool ResultadoRegistro= ServiceLogin.RegistrarUsuario(Nombre, Contrasena, CorreoElectronico); //probar que devuelva el nombre del usuario !null
+                
+
+                Validador Validador = new Validador();
+
+                bool correoValido = Validador.ValidarCorreo(CorreoElectronico);
+                if (correoValido == false)
+                {
+                    MessageBox.Show("correo no valido");
+                    
+                }
+
+                bool ResultadoRegistro= ServiceLogin.registrarUsuario(Nombre, Contrasena, CorreoElectronico); //probar que devuelva el nombre del usuario !null
                 if (ResultadoRegistro == true)
                 {
-                    CodigoRegistro VentanaCodigoRegistro = new CodigoRegistro();
+                    ClienteUsuario clienteUsuario = new ClienteUsuario();
+                    clienteUsuario.nombre = Nombre;
+
+                    CodigoRegistro VentanaCodigoRegistro = new CodigoRegistro(clienteUsuario);
                     VentanaCodigoRegistro.Show();
                     this.Close();                   
                 }
@@ -86,12 +102,30 @@ namespace cliente
         }
 
         private void TextBoxNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {          
-            Regex regex = new Regex(@"^[a-zA-Z]+$");
-            e.Handled = regex.IsMatch(e.Text);
+        {
+            Validador Validador = new Validador();
+            bool entrada = Validador.validarLetrasYNumeros(e.Text);
+            if (entrada == false )
+            {               
+                e.Handled = true;               
+            }        
         }
-    }
+        
+        private void PasswordBox_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
 
+        }
+
+        private void TextBoxContrasena_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Validador Validador = new Validador();
+            bool entrada = Validador.validarLetrasYNumeros(e.Text);
     
-    }
+                if (entrada == false)
+                {
+                    e.Handled = true;
+                }   
+        }
+    }    
+}
 
