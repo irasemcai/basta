@@ -1,0 +1,9 @@
+C:\Users\Reggi\source\repos\ServicioDeChat\Host\obj\Debug\Host.csprojAssemblyReference.cache
+C:\Users\Reggi\source\repos\ServicioDeChat\Host\bin\Debug\Host.exe.config
+C:\Users\Reggi\source\repos\ServicioDeChat\Host\bin\Debug\Host.exe
+C:\Users\Reggi\source\repos\ServicioDeChat\Host\bin\Debug\Host.pdb
+C:\Users\Reggi\source\repos\ServicioDeChat\Host\bin\Debug\ServicioDeChat.dll
+C:\Users\Reggi\source\repos\ServicioDeChat\Host\bin\Debug\ServicioDeChat.pdb
+C:\Users\Reggi\source\repos\ServicioDeChat\Host\obj\Debug\Host.csproj.CopyComplete
+C:\Users\Reggi\source\repos\ServicioDeChat\Host\obj\Debug\Host.exe
+C:\Users\Reggi\source\repos\ServicioDeChat\Host\obj\Debug\Host.pdb

@@ -1,0 +1,5 @@
+C:\Users\Reggi\source\repos\ServicioDeChat\ServicioDeChat\obj\Debug\ServicioDeChat.csprojAssemblyReference.cache
+C:\Users\Reggi\source\repos\ServicioDeChat\ServicioDeChat\bin\Debug\ServicioDeChat.dll
+C:\Users\Reggi\source\repos\ServicioDeChat\ServicioDeChat\bin\Debug\ServicioDeChat.pdb
+C:\Users\Reggi\source\repos\ServicioDeChat\ServicioDeChat\obj\Debug\ServicioDeChat.dll
+C:\Users\Reggi\source\repos\ServicioDeChat\ServicioDeChat\obj\Debug\ServicioDeChat.pdb
