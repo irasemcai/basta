@@ -3,18 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:cliente"
-        xmlns:p="clr-namespace:cliente.Properties"
+        xmlns:local="clr-namespace:cliente"     
         mc:Ignorable="d"
-        Title="Crear Usuario" Height="450" Width="800">
+        Title="{DynamicResource ResourceKey=TitleCreateUser}" Height="450" Width="800">
     <Grid Background="#FF1A1D40">
-        <TextBox x:Name="textBoxNombre" HorizontalAlignment="Left" Height="24" Margin="214,92,0,0" TextWrapping="Wrap" MaxLength="20" Text="{x:Static p:Resources.TextBoxName}" VerticalAlignment="Top" Width="376" TextChanged="TextBox_TextChanged" FontFamily="Arial" PreviewTextInput="TextBoxNombre_PreviewTextInput" />
-        <TextBox x:Name="textBoxEmail" HorizontalAlignment="Left" Height="23" Margin="214,225,0,0" TextWrapping="Wrap" Text="Correo electrónico" VerticalAlignment="Top" Width="376" TextChanged="TextBoxEmail_TextChanged" FontFamily="Arial" MaxLength="30"/>
-        <Button x:Name="buttonRegistrar" Content="{x:Static p:Resources.ButtonLogin}" HorizontalAlignment="Left" Margin="322,308,0,0" VerticalAlignment="Top" Width="160" Height="50" Click="Button_Click" Background="#FF6600CC" RenderTransformOrigin="1.04,0.703" FontFamily="Yu Gothic UI Semibold" FontSize="22" Foreground="#FFFFFDFD"/>
+        <TextBox x:Name="textBoxNombre" HorizontalAlignment="Left" Height="24" Margin="214,92,0,0" TextWrapping="Wrap" MaxLength="20" Text=" " VerticalAlignment="Top" Width="376" TextChanged="TextBox_TextChanged" FontFamily="Arial" PreviewTextInput="TextBoxNombre_PreviewTextInput" />
+        <TextBox x:Name="textBoxEmail" HorizontalAlignment="Left" Height="23" Margin="214,225,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="376" TextChanged="TextBoxEmail_TextChanged" FontFamily="Arial" MaxLength="30"/>
+        <Button x:Name="buttonRegistrar" Content="{DynamicResource ResourceKey=ButtonSignUp}" HorizontalAlignment="Left" Margin="322,308,0,0" VerticalAlignment="Top" Width="160" Height="50" Click="Button_Click" Background="#FF6600CC" RenderTransformOrigin="1.04,0.703" FontFamily="Yu Gothic UI Semibold" FontSize="22" Foreground="#FFFFFDFD"/>
         <TextBlock x:Name="TittleCrearUsuario" HorizontalAlignment="Left" Margin="290,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FF00CCCC" FontFamily="Segoe UI Semibold" FontSize="36" Height="39" Width="226"><Run Text="Crear Usuario"/><LineBreak/><Run/></TextBlock>
-        <Button Content="ya tengo cuenta" HorizontalAlignment="Left" Margin="650,39,0,0" VerticalAlignment="Top" Width="106" Height="41" Click="Button_Click_2"/>
+        <Button x:Name="buttonIniciarSesion" Content="{DynamicResource ResourceKey=ButtonLogIn}" HorizontalAlignment="Left" Margin="650,39,0,0" VerticalAlignment="Top" Width="106" Height="41" Click="Button_Click_2"/>
         <PasswordBox x:Name="textBoxContrasena" HorizontalAlignment="Left" Margin="214,154,0,0" VerticalAlignment="Top" Height="28" Width="376" DataContextChanged="PasswordBox_DataContextChanged" MinHeight="8" MaxLength="18" PreviewTextInput="TextBoxContrasena_PreviewTextInput"/>
-        <ComboBox HorizontalAlignment="Left" Margin="33,39,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="comboBoxIdiomas" HorizontalAlignment="Left" Margin="33,39,0,0" VerticalAlignment="Top" Width="102" SelectionChanged="ComboBox_SelectionChanged" ItemsSource="{Binding idiomas}"/>
 
     </Grid>
 </Window>

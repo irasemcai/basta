@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace juegoBasta.Domain
 {
-    [DataContract] //con el data contract hacer operaciones crud desde el server, no mas controlador. 
+    [DataContract] 
     public class SalaDeEspera
     {
         [DataMember]
         public int salaId { get; set; }
 
         [DataMember]
-        public ObservableCollection<Usuario> ListaUsuariosEnSala { get; set; }
+        public List<ClienteUsuario> UsuariosEnSala { get; set; }
        
         public SalaDeEspera()
         {

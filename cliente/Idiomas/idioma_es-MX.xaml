@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:cliente"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="ButtonLogIn">Iniciar Sesión</system:String>
+    <system:String x:Key="ButtonSignUp">Registrarme</system:String>
+    <system:String x:Key="TitleCreateUser">Registrate</system:String>
+    <system:String x:Key="ButtonBack">Regresar</system:String>
+    <system:String x:Key="TittleCodeLogin">Ingresa tu código de registro que enviamos a tu correo</system:String>
+
+    <system:String x:Key="Username">Nombre de usuario</system:String>
+    <system:String x:Key="ButtonLogOut">Cerrar sesión</system:String>
+    
+
+</ResourceDictionary>

@@ -59,55 +59,14 @@ namespace cliente.ServiceBasta {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceBasta.IServiceBastaCodigo")]
-    public interface IServiceBastaCodigo {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBastaCodigo/verificarCodigoRegistro", ReplyAction="http://tempuri.org/IServiceBastaCodigo/verificarCodigoRegistroResponse")]
-        cliente.ServiceBasta.ClienteUsuario verificarCodigoRegistro(int Codigo);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBastaCodigo/verificarCodigoRegistro", ReplyAction="http://tempuri.org/IServiceBastaCodigo/verificarCodigoRegistroResponse")]
-        System.Threading.Tasks.Task<cliente.ServiceBasta.ClienteUsuario> verificarCodigoRegistroAsync(int Codigo);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceBastaCodigoChannel : cliente.ServiceBasta.IServiceBastaCodigo, System.ServiceModel.IClientChannel {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceBastaCodigoClient : System.ServiceModel.ClientBase<cliente.ServiceBasta.IServiceBastaCodigo>, cliente.ServiceBasta.IServiceBastaCodigo {
-        
-        public ServiceBastaCodigoClient() {
-        }
-        
-        public ServiceBastaCodigoClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
-        }
-        
-        public ServiceBastaCodigoClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
-        }
-        
-        public ServiceBastaCodigoClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
-        }
-        
-        public ServiceBastaCodigoClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
-        }
-        
-        public cliente.ServiceBasta.ClienteUsuario verificarCodigoRegistro(int Codigo) {
-            return base.Channel.verificarCodigoRegistro(Codigo);
-        }
-        
-        public System.Threading.Tasks.Task<cliente.ServiceBasta.ClienteUsuario> verificarCodigoRegistroAsync(int Codigo) {
-            return base.Channel.verificarCodigoRegistroAsync(Codigo);
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceBasta.IServiceLogin")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceBasta.IServiceLogin", CallbackContract=typeof(cliente.ServiceBasta.IServiceLoginCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IServiceLogin {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceLogin/registrarUsuario")]
+        void registrarUsuario(string Nombre, string Contrasena, string CorreoElectronico);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceLogin/registrarUsuario")]
+        System.Threading.Tasks.Task registrarUsuarioAsync(string Nombre, string Contrasena, string CorreoElectronico);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLogin/iniciarSesion", ReplyAction="http://tempuri.org/IServiceLogin/iniciarSesionResponse")]
         bool iniciarSesion(string Nombre, string Contrasena);
@@ -115,11 +74,21 @@ namespace cliente.ServiceBasta {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLogin/iniciarSesion", ReplyAction="http://tempuri.org/IServiceLogin/iniciarSesionResponse")]
         System.Threading.Tasks.Task<bool> iniciarSesionAsync(string Nombre, string Contrasena);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLogin/registrarUsuario", ReplyAction="http://tempuri.org/IServiceLogin/registrarUsuarioResponse")]
-        bool registrarUsuario(string Nombre, string Contrasena, string CorreoElectronico);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLogin/verificarCodigoRegistro", ReplyAction="http://tempuri.org/IServiceLogin/verificarCodigoRegistroResponse")]
+        cliente.ServiceBasta.ClienteUsuario verificarCodigoRegistro(int Codigo, string cliente);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLogin/registrarUsuario", ReplyAction="http://tempuri.org/IServiceLogin/registrarUsuarioResponse")]
-        System.Threading.Tasks.Task<bool> registrarUsuarioAsync(string Nombre, string Contrasena, string CorreoElectronico);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLogin/verificarCodigoRegistro", ReplyAction="http://tempuri.org/IServiceLogin/verificarCodigoRegistroResponse")]
+        System.Threading.Tasks.Task<cliente.ServiceBasta.ClienteUsuario> verificarCodigoRegistroAsync(int Codigo, string cliente);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IServiceLoginCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceLogin/enviarNotificacionANuevoUsuario")]
+        void enviarNotificacionANuevoUsuario(string notificacion);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceLogin/enviarUsuarioRegistrado")]
+        void enviarUsuarioRegistrado(cliente.ServiceBasta.ClienteUsuario clienteUsuario);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -128,25 +97,34 @@ namespace cliente.ServiceBasta {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceLoginClient : System.ServiceModel.ClientBase<cliente.ServiceBasta.IServiceLogin>, cliente.ServiceBasta.IServiceLogin {
+    public partial class ServiceLoginClient : System.ServiceModel.DuplexClientBase<cliente.ServiceBasta.IServiceLogin>, cliente.ServiceBasta.IServiceLogin {
         
-        public ServiceLoginClient() {
+        public ServiceLoginClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
         }
         
-        public ServiceLoginClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
+        public ServiceLoginClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
         }
         
-        public ServiceLoginClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public ServiceLoginClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceLoginClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public ServiceLoginClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceLoginClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
+        public ServiceLoginClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void registrarUsuario(string Nombre, string Contrasena, string CorreoElectronico) {
+            base.Channel.registrarUsuario(Nombre, Contrasena, CorreoElectronico);
+        }
+        
+        public System.Threading.Tasks.Task registrarUsuarioAsync(string Nombre, string Contrasena, string CorreoElectronico) {
+            return base.Channel.registrarUsuarioAsync(Nombre, Contrasena, CorreoElectronico);
         }
         
         public bool iniciarSesion(string Nombre, string Contrasena) {
@@ -157,12 +135,12 @@ namespace cliente.ServiceBasta {
             return base.Channel.iniciarSesionAsync(Nombre, Contrasena);
         }
         
-        public bool registrarUsuario(string Nombre, string Contrasena, string CorreoElectronico) {
-            return base.Channel.registrarUsuario(Nombre, Contrasena, CorreoElectronico);
+        public cliente.ServiceBasta.ClienteUsuario verificarCodigoRegistro(int Codigo, string cliente) {
+            return base.Channel.verificarCodigoRegistro(Codigo, cliente);
         }
         
-        public System.Threading.Tasks.Task<bool> registrarUsuarioAsync(string Nombre, string Contrasena, string CorreoElectronico) {
-            return base.Channel.registrarUsuarioAsync(Nombre, Contrasena, CorreoElectronico);
+        public System.Threading.Tasks.Task<cliente.ServiceBasta.ClienteUsuario> verificarCodigoRegistroAsync(int Codigo, string cliente) {
+            return base.Channel.verificarCodigoRegistroAsync(Codigo, cliente);
         }
     }
     
@@ -171,16 +149,22 @@ namespace cliente.ServiceBasta {
     public interface IServiceBastaSala {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBastaSala/crearSalaEspera")]
-        void crearSalaEspera(int id, int limiteParticipantes, string anfitrion);
+        void crearSalaEspera(cliente.ServiceBasta.ClienteUsuario cliente);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBastaSala/crearSalaEspera")]
-        System.Threading.Tasks.Task crearSalaEsperaAsync(int id, int limiteParticipantes, string anfitrion);
+        System.Threading.Tasks.Task crearSalaEsperaAsync(cliente.ServiceBasta.ClienteUsuario cliente);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBastaSala/unirseASala")]
         void unirseASala(cliente.ServiceBasta.ClienteUsuario cliente);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceBastaSala/unirseASala")]
         System.Threading.Tasks.Task unirseASalaAsync(cliente.ServiceBasta.ClienteUsuario cliente);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBastaSala/mostrarClientesConectados", ReplyAction="http://tempuri.org/IServiceBastaSala/mostrarClientesConectadosResponse")]
+        cliente.ServiceBasta.ClienteUsuario[] mostrarClientesConectados();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceBastaSala/mostrarClientesConectados", ReplyAction="http://tempuri.org/IServiceBastaSala/mostrarClientesConectadosResponse")]
+        System.Threading.Tasks.Task<cliente.ServiceBasta.ClienteUsuario[]> mostrarClientesConectadosAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -218,12 +202,12 @@ namespace cliente.ServiceBasta {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void crearSalaEspera(int id, int limiteParticipantes, string anfitrion) {
-            base.Channel.crearSalaEspera(id, limiteParticipantes, anfitrion);
+        public void crearSalaEspera(cliente.ServiceBasta.ClienteUsuario cliente) {
+            base.Channel.crearSalaEspera(cliente);
         }
         
-        public System.Threading.Tasks.Task crearSalaEsperaAsync(int id, int limiteParticipantes, string anfitrion) {
-            return base.Channel.crearSalaEsperaAsync(id, limiteParticipantes, anfitrion);
+        public System.Threading.Tasks.Task crearSalaEsperaAsync(cliente.ServiceBasta.ClienteUsuario cliente) {
+            return base.Channel.crearSalaEsperaAsync(cliente);
         }
         
         public void unirseASala(cliente.ServiceBasta.ClienteUsuario cliente) {
@@ -232,6 +216,14 @@ namespace cliente.ServiceBasta {
         
         public System.Threading.Tasks.Task unirseASalaAsync(cliente.ServiceBasta.ClienteUsuario cliente) {
             return base.Channel.unirseASalaAsync(cliente);
+        }
+        
+        public cliente.ServiceBasta.ClienteUsuario[] mostrarClientesConectados() {
+            return base.Channel.mostrarClientesConectados();
+        }
+        
+        public System.Threading.Tasks.Task<cliente.ServiceBasta.ClienteUsuario[]> mostrarClientesConectadosAsync() {
+            return base.Channel.mostrarClientesConectadosAsync();
         }
     }
 }

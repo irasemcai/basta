@@ -4,6 +4,10 @@
              xmlns:local="clr-namespace:cliente"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Idiomas/Idioma_es-MX.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

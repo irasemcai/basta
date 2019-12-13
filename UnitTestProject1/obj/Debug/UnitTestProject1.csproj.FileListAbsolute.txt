@@ -31,3 +31,5 @@ C:\Users\survi\Desktop\basta\UnitTestProject1\obj\Debug\UnitTestProject1.csproj.
 C:\Users\survi\Desktop\basta\UnitTestProject1\obj\Debug\UnitTestProject1.dll
 C:\Users\survi\Desktop\basta\UnitTestProject1\obj\Debug\UnitTestProject1.pdb
 C:\Users\survi\Desktop\basta\UnitTestProject1\bin\Debug\UnitTestProject1.dll.config
+C:\Users\survi\Desktop\basta\UnitTestProject1\bin\Debug\ServicioDeChat.dll
+C:\Users\survi\Desktop\basta\UnitTestProject1\bin\Debug\ServicioDeChat.pdb

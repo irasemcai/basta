@@ -8,28 +8,35 @@ using System.Windows.Controls;
 
 namespace cliente
 {
-    public partial class CodigoRegistro : Window
+    public partial class CodigoRegistro : Window, ServiceBasta.IServiceLoginCallback
     {
+        
+        ServiceBasta.ClienteUsuario ClienteUsuario = null;
         public CodigoRegistro(ClienteUsuario clienteUsuario)
         {
             InitializeComponent();
+            ClienteUsuario = clienteUsuario;
         }
 
+        
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ServiceBasta.ServiceBastaCodigoClient ServiceBastaCodigoClient = null;
+            
+            ServiceBasta.ServiceLoginClient ServiceBastaCodigoClient = null;
             try
             {
                 string Codigotxt = textBoxCodigo.Text;
                 int codigoInt = int.Parse(Codigotxt);
 
-                ServiceBastaCodigoClient = new ServiceBasta.ServiceBastaCodigoClient();
-                ClienteUsuario clienteUsuario = new ClienteUsuario();
-                clienteUsuario = ServiceBastaCodigoClient.verificarCodigoRegistro(codigoInt);
+                InstanceContext instanceContext = new InstanceContext(this);
+                ServiceBastaCodigoClient = new ServiceBasta.ServiceLoginClient(instanceContext);
 
-                if (clienteUsuario != null)
+                ClienteUsuario clienteUsuarioCorrecto = new ClienteUsuario();
+                clienteUsuarioCorrecto = ServiceBastaCodigoClient.verificarCodigoRegistro(codigoInt, ClienteUsuario.nombre);
+
+                if (clienteUsuarioCorrecto != null)
                 {
-                    CuentaDeUsuario cuentaDeUsuario = new CuentaDeUsuario(clienteUsuario);
+                    CuentaDeUsuario cuentaDeUsuario = new CuentaDeUsuario(clienteUsuarioCorrecto);
                     cuentaDeUsuario.Show();
                     this.Close();
                 }
@@ -50,7 +57,7 @@ namespace cliente
                 ServiceBastaCodigoClient.Abort();
                 NotificadorDeExcepcion Notificador = new NotificadorDeExcepcion();
                 Notificador.NotificarErrorComunicacion(Excepcion);
-            }
+            } 
         }
 
         private void TextBoxCodigo_TextChanged(object sender, TextChangedEventArgs e)
@@ -75,6 +82,16 @@ namespace cliente
                 e.Handled = true;
             }
 
+        }
+
+        public void enviarNotificacionANuevoUsuario(string notificacion)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void enviarUsuarioRegistrado(ClienteUsuario clienteUsuario)
+        {
+            throw new NotImplementedException();
         }
     }
 }

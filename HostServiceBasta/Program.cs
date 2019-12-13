@@ -1,25 +1,28 @@
 ﻿using System;
 using System.Net.Sockets;
 using System.ServiceModel;
+using Host = System.ServiceModel.ServiceHost;
+using ServiceHost = juegoBasta.ServiceHost;
 
 namespace HostServiceBasta
 {
-    class Program
+    internal static class Program
     {
-        
+
         static void Main(string[] args)
         {
-            using (ServiceHost host = new ServiceHost(typeof(juegoBasta.ServiceBasta)))
+
+            using (var host = new Host(typeof(ServiceHost)))
             {
                 try
                 {
                     host.Open();
-                    Console.WriteLine("ServerBasta is running");
+                    Console.WriteLine($"ServerBasta is running now {host.Description.Name}");
                     Console.ReadLine();
                 }
-                catch (SocketException)
+                catch (CommunicationException e)
                 {
-                    Console.WriteLine("ServerBasta error");
+                    Console.WriteLine("ServerBasta error"+ e.Message);
                 }
             }
 
@@ -27,3 +30,4 @@ namespace HostServiceBasta
         }
     }
 }
+

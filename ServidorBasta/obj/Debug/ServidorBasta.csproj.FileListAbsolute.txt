@@ -1,2 +1,0 @@
-C:\Users\survi\Desktop\basta\ServidorBasta\obj\Debug\ServidorBasta.csprojAssemblyReference.cache
-C:\Users\survi\Desktop\basta\ServidorBasta\obj\Debug\ServidorBasta.csproj.CoreCompileInputs.cache

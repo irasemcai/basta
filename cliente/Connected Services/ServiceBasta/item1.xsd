@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:8081/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/juegoBasta.Domain" />
-  <xs:element name="verificarCodigoRegistro">
+  <xs:element name="registrarUsuario">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="Codigo" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="verificarCodigoRegistroResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/juegoBasta.Domain" minOccurs="0" name="verificarCodigoRegistroResult" nillable="true" type="q1:ClienteUsuario" />
+        <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Contrasena" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CorreoElectronico" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -30,42 +25,65 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="registrarUsuario">
+  <xs:element name="verificarCodigoRegistro">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Contrasena" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="CorreoElectronico" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Codigo" type="xs:int" />
+        <xs:element minOccurs="0" name="cliente" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="registrarUsuarioResponse">
+  <xs:element name="verificarCodigoRegistroResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="registrarUsuarioResult" type="xs:boolean" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/juegoBasta.Domain" minOccurs="0" name="verificarCodigoRegistroResult" nillable="true" type="q1:ClienteUsuario" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="enviarNotificacionANuevoUsuario">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="notificacion" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="enviarUsuarioRegistrado">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/juegoBasta.Domain" minOccurs="0" name="clienteUsuario" nillable="true" type="q2:ClienteUsuario" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="crearSalaEspera">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="id" type="xs:int" />
-        <xs:element minOccurs="0" name="limiteParticipantes" type="xs:int" />
-        <xs:element minOccurs="0" name="anfitrion" nillable="true" type="xs:string" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/juegoBasta.Domain" minOccurs="0" name="cliente" nillable="true" type="q3:ClienteUsuario" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="unirseASala">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/juegoBasta.Domain" minOccurs="0" name="cliente" nillable="true" type="q2:ClienteUsuario" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/juegoBasta.Domain" minOccurs="0" name="cliente" nillable="true" type="q4:ClienteUsuario" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="mostrarClientesConectados">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="mostrarClientesConectadosResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/juegoBasta.Domain" minOccurs="0" name="mostrarClientesConectadosResult" nillable="true" type="q5:ArrayOfClienteUsuario" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ActualizarClientes">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/juegoBasta.Domain" minOccurs="0" name="clientes" nillable="true" type="q3:ArrayOfClienteUsuario" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/juegoBasta.Domain" minOccurs="0" name="clientes" nillable="true" type="q6:ArrayOfClienteUsuario" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -60,7 +60,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompositeType.cs" />
+    <Compile Include="ServiceSala.cs" />
+    <Compile Include="ServiceHost.cs" />
     <Compile Include="conversation.cs">
       <DependentUpon>dbBasta.tt</DependentUpon>
     </Compile>
@@ -89,7 +90,6 @@
     <Compile Include="gameUser.cs">
       <DependentUpon>dbBasta.tt</DependentUpon>
     </Compile>
-    <Compile Include="Contratos\IServiceBastaCodigo.cs" />
     <Compile Include="Contratos\IServiceBastaSala.cs" />
     <Compile Include="Contratos\IServiceLogin.cs" />
     <Compile Include="message.cs">
@@ -100,6 +100,7 @@
       <DependentUpon>dbBasta.tt</DependentUpon>
     </Compile>
     <Compile Include="ServiceBasta.cs" />
+    <Compile Include="ServiceLogin.cs" />
     <Compile Include="sysdiagram.cs">
       <DependentUpon>dbBasta.tt</DependentUpon>
     </Compile>

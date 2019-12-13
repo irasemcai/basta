@@ -80,6 +80,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Idiomas\idioma_en-US.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Idiomas\idioma_es-MX.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="InicioSesion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

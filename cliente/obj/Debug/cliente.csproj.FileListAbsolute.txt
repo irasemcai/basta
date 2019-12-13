@@ -27,3 +27,6 @@ C:\Users\survi\Desktop\basta\cliente\obj\Debug\cliente.Properties.Resources.es-M
 C:\Users\survi\Desktop\basta\cliente\obj\Debug\cliente.csproj.GenerateResource.cache
 C:\Users\survi\Desktop\basta\cliente\obj\Debug\es-MX\cliente.resources.dll
 C:\Users\survi\Desktop\basta\cliente\obj\Debug\cliente.Properties.Resources.resources
+C:\Users\survi\Desktop\basta\cliente\obj\Debug\App.baml
+C:\Users\survi\Desktop\basta\cliente\obj\Debug\Idiomas\Idioma_en-US.baml
+C:\Users\survi\Desktop\basta\cliente\obj\Debug\Idiomas\idioma_es-MX.baml

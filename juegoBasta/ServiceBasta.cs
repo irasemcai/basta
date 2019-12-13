@@ -9,8 +9,8 @@ namespace juegoBasta
     // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de clase "Service1" en el código y en el archivo de configuración a la vez.
     //[ServiceBehavior(ConcurrencyMode= ConcurrencyMode.Reentrant)]
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple, InstanceContextMode = InstanceContextMode.Single)]
-    public class ServiceBasta : IServiceBastaCodigo, IServiceLogin,  IServiceBastaSala
-    {
+    public class ServiceBasta
+    { /*
         Type providerService = typeof(System.Data.Entity.SqlServer.SqlProviderServices);
 
         private IBastaSalaCallback bastaSalaCallback = null;
@@ -75,19 +75,7 @@ namespace juegoBasta
             }
         }
 
-        public ClienteUsuario verificarCodigoRegistro(int Codigo, ClienteUsuario cliente)
-        {
-            foreach (ClienteUsuario Usuario in NUEVOSUSUARIOS.Keys)
-            {
-                if (NUEVOSUSUARIOS[cliente].Equals(Codigo))
-                {
-                    USUARIOSCONECTADOS.Add(Usuario.nombre);
-                    Console.WriteLine($"{Usuario} ha completado su registro e inició sesión");
-                    return Usuario;
-                }
-            }
-            return null;
-        }
+     
 
         public void crearSalaEspera(int id, int limiteParticipantes, string anfitrion)
         {
@@ -132,7 +120,8 @@ namespace juegoBasta
             }
             Console.WriteLine(":D");
         }
+    } */
+
     }
-        
 }
 

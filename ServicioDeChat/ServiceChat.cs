@@ -12,6 +12,19 @@ namespace ServicioDeChat
     {
         List<Usuario> usuarios = new List<Usuario>();
         int SiguienteId = 1;
+        
+        /*
+         * *Pruebas
+         */
+        private Func<IServiceChatCallback> callbackChannel;
+
+        /*
+         * *Pruebas
+         */
+        public ServiceChat(Func<IServiceChatCallback> callback)
+        {
+            this.callbackChannel = callback ?? throw new ArgumentNullException("callback Creator");
+        }
 
         public int Conectar(string Nombre)
         {

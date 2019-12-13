@@ -29,7 +29,6 @@ namespace juegoBasta.Domain
             bool Resultado = Entidades.users.Any(x => x.name == nombreUsuario && x.password == contrasena);
             if (Resultado)
             {
-
                 return true;
             }
             else

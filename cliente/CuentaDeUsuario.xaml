@@ -7,9 +7,16 @@
         mc:Ignorable="d"
         Title="CuentaDeUsuario" Height="450" Width="800">
     <Grid Background="#FF1A1D40">
-        <Button x:Name="buttonCerrarSesion" Content="Cerrar sesión" HorizontalAlignment="Left" Margin="625,31,0,0" VerticalAlignment="Top" Width="127" Height="46" Click="Button_Click"/>
+        <Button x:Name="buttonCerrarSesion" Content="{DynamicResource ResourceKey=ButtonLogOut}" HorizontalAlignment="Left" Margin="625,31,0,0" VerticalAlignment="Top" Width="127" Height="46" Click="Button_Click"/>
         <Button x:Name="buttonCrearSala" Content="Iniciar sala de espera" HorizontalAlignment="Left" Margin="580,130,0,0" VerticalAlignment="Top" Width="172" Height="52" Click="Button_Click_1"/>
-        <TextBlock x:Name="textBlockUserName" HorizontalAlignment="Left" Margin="70,45,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="35" Width="80" Foreground="White"/>
+        <TextBlock x:Name="textBlockUserName" HorizontalAlignment="Left" Margin="35,50,0,0" TextWrapping="Wrap" Text="{DynamicResource ResourceKey=Username}" VerticalAlignment="Top" Height="40" Width="240" FontFamily="Segoe UI Historic" FontSize="24">
+            <TextBlock.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFFF227C" Offset="0.008"/>
+                    <GradientStop Color="#FFE229DA" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBlock.Foreground>
+        </TextBlock>
 
     </Grid>
 </Window>

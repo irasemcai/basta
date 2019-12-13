@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="NuevaSalaEspera" Height="450" Width="800">
     <Grid Background="#FF1A1D40">
-        <Button x:Name="ButtonAgregarSala" Content="Unirme" HorizontalAlignment="Left" Margin="282,320,0,0" VerticalAlignment="Top" Width="223" Height="50" Click="ButtonAgregarSala_Click"/>
+        <Button x:Name="ButtonUnirASala" Content="Unirme" HorizontalAlignment="Left" Margin="115,325,0,0" VerticalAlignment="Top" Width="223" Height="50" Click="ButtonUnirSala_Click"/>
         <TextBox x:Name="textboxIdSala" HorizontalAlignment="Left" Height="23" Margin="158,126,0,0" TextWrapping="Wrap" Text="id" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="textboxNumParticipantes" HorizontalAlignment="Left" Height="23" Margin="158,175,0,0" TextWrapping="Wrap" Text="número participantes" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="textboxNombreUsuario" HorizontalAlignment="Left" Height="23" Margin="158,219,0,0" TextWrapping="Wrap" Text="nombre anfitrión" VerticalAlignment="Top" Width="120"/>
@@ -19,6 +19,7 @@
                 </LinearGradientBrush>
             </ListBox.Background>
         </ListBox>
+        <Button x:Name="ButtonCrearSala" Content="crear sala" HorizontalAlignment="Left" Margin="505,335,0,0" VerticalAlignment="Top" Width="175" Height="50" Click="ButtonCrearSala_Click"/>
 
     </Grid>
 </Window>

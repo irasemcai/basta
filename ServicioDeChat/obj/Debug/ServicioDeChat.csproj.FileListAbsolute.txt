@@ -3,3 +3,17 @@ C:\Users\Reggi\source\repos\ServicioDeChat\ServicioDeChat\bin\Debug\ServicioDeCh
 C:\Users\Reggi\source\repos\ServicioDeChat\ServicioDeChat\bin\Debug\ServicioDeChat.pdb
 C:\Users\Reggi\source\repos\ServicioDeChat\ServicioDeChat\obj\Debug\ServicioDeChat.dll
 C:\Users\Reggi\source\repos\ServicioDeChat\ServicioDeChat\obj\Debug\ServicioDeChat.pdb
+C:\Users\survi\Desktop\basta\ServicioDeChat\bin\Debug\ServicioDeChat.dll
+C:\Users\survi\Desktop\basta\ServicioDeChat\bin\Debug\ServicioDeChat.pdb
+C:\Users\survi\Desktop\basta\ServicioDeChat\bin\Debug\juegoBasta.dll
+C:\Users\survi\Desktop\basta\ServicioDeChat\bin\Debug\EntityFramework.dll
+C:\Users\survi\Desktop\basta\ServicioDeChat\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\survi\Desktop\basta\ServicioDeChat\bin\Debug\juegoBasta.pdb
+C:\Users\survi\Desktop\basta\ServicioDeChat\bin\Debug\juegoBasta.dll.config
+C:\Users\survi\Desktop\basta\ServicioDeChat\bin\Debug\EntityFramework.xml
+C:\Users\survi\Desktop\basta\ServicioDeChat\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\survi\Desktop\basta\ServicioDeChat\obj\Debug\ServicioDeChat.csprojAssemblyReference.cache
+C:\Users\survi\Desktop\basta\ServicioDeChat\obj\Debug\ServicioDeChat.csproj.CoreCompileInputs.cache
+C:\Users\survi\Desktop\basta\ServicioDeChat\obj\Debug\ServicioDeChat.csproj.CopyComplete
+C:\Users\survi\Desktop\basta\ServicioDeChat\obj\Debug\ServicioDeChat.dll
+C:\Users\survi\Desktop\basta\ServicioDeChat\obj\Debug\ServicioDeChat.pdb

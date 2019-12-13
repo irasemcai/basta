@@ -8,16 +8,19 @@ namespace juegoBasta
     [ServiceContract(CallbackContract = typeof(IBastaSalaCallback), SessionMode = SessionMode.Required)]
 
 
-    interface IServiceBastaSala
+  public  interface IServiceBastaSala
     {
         [OperationContract(IsOneWay = true)]
-        void crearSalaEspera(int id, int limiteParticipantes, string anfitrion);
+        void crearSalaEspera(ClienteUsuario cliente);
 
         [OperationContract(IsOneWay = true)]
         void unirseASala(ClienteUsuario cliente);
+
+        [OperationContract]
+        List<ClienteUsuario> mostrarClientesConectados();
     }
 
-    interface IBastaSalaCallback
+  public interface IBastaSalaCallback
     {
         [OperationContract(IsOneWay = true)]
         void ActualizarClientes(List<ClienteUsuario> clientes);
